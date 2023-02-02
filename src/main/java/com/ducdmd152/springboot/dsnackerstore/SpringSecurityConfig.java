@@ -53,8 +53,11 @@ public class SpringSecurityConfig {
 	
 	@Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-			.antMatchers("/shop/**").hasRole("CUSTOMER")
+		http
+			.authorizeRequests()
+				.antMatchers("/shop/**").hasRole("CUSTOMER")
+			.and()
+				.exceptionHandling().accessDeniedPage("/fail")
 			.and()
 				.formLogin().permitAll()
 //			.and()
