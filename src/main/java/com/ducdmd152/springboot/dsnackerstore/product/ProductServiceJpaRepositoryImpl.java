@@ -15,5 +15,10 @@ public class ProductServiceJpaRepositoryImpl
 	@Override
 	public List<Product> getProducts() {
 		return productJpaRepository.findAll();
+	}
+	
+	@Override
+	public List<Product> getAvailableProducts() {
+		return productJpaRepository.findAllByStatus(true);
 	}	
 }

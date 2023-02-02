@@ -18,7 +18,7 @@ public class ShopController {
 	
 	@RequestMapping("/list")
 	public String listProducts(Model model) {
-		List<Product> products = productService.getProducts();
+		List<Product> products = productService.getAvailableProducts();
 		model.addAttribute("PRODUCTS", products);
 		return "raw/shop/list-products";
 	}
