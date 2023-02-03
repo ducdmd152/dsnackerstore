@@ -8,6 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="user_detail")
@@ -30,9 +33,13 @@ public class UserDetail {
 	}
 	
 	@Column(name="fullname")
+	@NotNull(message="Your name is required.")
+	@Size(min = 4, max = 32, message="Name is required from 4 to 32 characters.")
 	private String fullname;
 	
 	@Column(name="email")
+	@NotNull(message="Email address is required.")
+	@Email(message="Wrong email format.")
 	private String email;
 
 	public UserDetail() {

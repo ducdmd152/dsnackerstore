@@ -12,15 +12,21 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="users")
 public class User {
 	@Id
 	@Column(name="username")
+	@NotNull(message="Username is required.")
+	@Size(min = 6, max = 20, message="Username is required input from 6 to 20 characters")
 	private String username;
 	
 	@Column(name="password")
+	@NotNull(message="Password is required.")
+	@Size(min = 8, max = 20, message="Password is required input from 8 to 20 characters")
 	private String password;
 	
 	@Column(name="enabled")
@@ -97,8 +103,5 @@ public class User {
 		return "User [username=" + username + ", password=" + password + ", enabled=" + enabled + ", userDetail="
 				+ userDetail + ", authorities=" + authorities + "]";
 	}
-
-	
-	
 
 }

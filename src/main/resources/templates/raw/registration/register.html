@@ -24,39 +24,44 @@
 						<div class="card shadow-lg">
 							<div class="card-body p-5">
 								<h1 class="fs-4 card-title fw-bold mb-4">Register</h1>
-								<form 
-									th:action="@{/registration/performRegister}"
-									th:object="${USER}" 
-									method="POST"
-									class="needs-validation" novalidate=""
-									autocomplete="off">
-									
+								<form th:action="@{/registration/performRegister}"
+									th:object="${USER}" method="POST" class="needs-validation"
+									novalidate="" autocomplete="off">
+
 									<div class="mb-3">
-										<label class="mb-2 text-muted" for="email">Your name</label>
-										<input type="text"
-											th:field="*{userDetail.fullname}" class="form-control">
-										<div class="invalid-feedback">Fullname is invalid</div>
+										<label class="mb-2 text-muted" for="email">Your name</label> <input
+											type="text" th:field="*{userDetail.fullname}"
+											class="form-control">
+										<small class="text-danger fst-italic"
+											th:if="${#fields.hasErrors('userDetail.fullname')}"
+											th:errors="*{userDetail.fullname"/>
+										
 									</div>
-									
+
 									<div class="mb-3">
-										<label class="mb-2 text-muted" for="name">Username</label>
-										<input
-											th:field="*{username}" class="form-control">
-										<div class="invalid-feedback">Name is required</div>
+										<label class="mb-2 text-muted" for="username">Username</label>
+										<input th:field="*{username}" class="form-control">
+										<small class="text-danger fst-italic"
+											th:if="${#fields.hasErrors('username')}"
+											th:errors="*{username}"/>
 									</div>
 
 									<div class="mb-3">
 										<label class="mb-2 text-muted" for="password">Password</label>
-										<input type="password"
-											th:field="*{password}" class="form-control">
-										<div class="invalid-feedback">Password is required</div>
+										<input type="password" th:field="*{password}"
+											class="form-control">
+										<small class="text-danger fst-italic"
+											th:if="${#fields.hasErrors('password')}"
+											th:errors="*{password}"/>
 									</div>
 
 									<div class="mb-3">
-										<label class="mb-2 text-muted" for="email">E-Mail</label>
-										<input type="email"
-											th:field="*{userDetail.email}" class="form-control">
-										<div class="invalid-feedback">Email is invalid</div>
+										<label class="mb-2 text-muted" for="email">E-Mail</label> <input
+											type="email" th:field="*{userDetail.email}"
+											class="form-control">
+										<small class="text-danger fst-italic"
+											th:if="${#fields.hasErrors('userDetail.email')}"
+											th:errors="*{userDetail.email}"/>
 									</div>
 
 									<p class="form-text text-muted mb-3">By registering you
