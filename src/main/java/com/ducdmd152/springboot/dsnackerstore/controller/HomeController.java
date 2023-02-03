@@ -12,7 +12,7 @@ public class HomeController {
 	public String showHome(Model model,
 			Principal principal
 			) {
-		model.addAttribute("username", principal.getName());
+//		model.addAttribute("username", principal.getName());
 		return "home";
 	}
 	

@@ -70,13 +70,25 @@ public class SpringSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
-				.antMatchers("/shop/**").hasRole("CUSTOMER")
+				.antMatchers("/registration/**").anonymous()
+				.antMatchers("/guest/**").anonymous()
+				.antMatchers("/customer/**").hasRole("CUSTOMER")
+				.antMatchers("/employee/**").hasRole("EMPLOYEE")
+				.antMatchers("/owner/**").hasRole("OWNER")
+				.antMatchers("/shop/**").not().hasRole("OWNER")
 			.and()
 				.exceptionHandling().accessDeniedPage("/fail")
 			.and()
-				.formLogin().permitAll()
-//			.and()
-//				.logout().permitAll()
+				.formLogin()
+					.loginPage("/registration/showLogin")
+					.loginProcessingUrl("/authenticate")
+					.permitAll()
+				/*
+				 * .and() .formLogin() 
+				 * .loginProcessingUrl("authenticate") .permitAll()
+				 */
+			.and()
+				.logout().permitAll()
 			;
 		
 		return http.build();
