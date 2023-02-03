@@ -24,13 +24,20 @@ public class SpringSecurityConfig {
 //	Authentication by accounts in memory
 	@Bean
 	@Autowired
-	public AuthenticationManager authenticationManager(HttpSecurity http, DataSource datasource) 
+	public AuthenticationManager authenticationManager(HttpSecurity http, DataSource datasource, PasswordEncoder passwordEncoder) 
 	  throws Exception {
 	    return http.getSharedObject(AuthenticationManagerBuilder.class)
 	      .jdbcAuthentication().dataSource(datasource)
+	      .passwordEncoder(passwordEncoder)
 	      .and()
 	      .build();
 	}
+	
+	@Bean
+    public PasswordEncoder passwordEncoder() {
+        PasswordEncoder encoder = new BCryptPasswordEncoder();
+        return encoder;
+    }
 	
 //	Authentication by accounts in memory
 //	@Bean
@@ -60,11 +67,7 @@ public class SpringSecurityConfig {
 //	      .build();
 //	}
 //	
-//	@Bean
-//    public PasswordEncoder passwordEncoder() {
-//        PasswordEncoder encoder = new BCryptPasswordEncoder();
-//        return encoder;
-//    }
+
 	
 	@Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {

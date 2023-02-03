@@ -26,7 +26,7 @@
 								<h1 class="fs-4 card-title fw-bold mb-4">Login</h1>
 								<form th:action="@{/authenticate}" method="POST"
 									class="needs-validation" novalidate="" autocomplete="off">
-									<div th:if="${REGISTERED}" class="alert alert-success" role="alert">
+									<div th:if="${param.registered != null}" class="alert alert-success" role="alert">
 										Registered Successful!</div>
 									<div class="mb-3">
 										<label class="mb-2 text-muted" for="username">Username</label>

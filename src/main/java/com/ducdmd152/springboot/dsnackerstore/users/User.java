@@ -24,10 +24,9 @@ public class User {
 	private String password;
 	
 	@Column(name="enabled")
-	private boolean enabled;
+	private boolean enabled = true;
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="username")
+	@OneToOne(mappedBy = "user", cascade=CascadeType.ALL)
 	private UserDetail userDetail;
 	
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -39,6 +38,7 @@ public class User {
 		}
 		
 		authorities.add(authority);
+		authority.setUsername(username);
 	}
 	public List<Authority> getAuthorities() {
 		return authorities;
@@ -92,12 +92,13 @@ public class User {
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
-
-
 	@Override
 	public String toString() {
-		return "User [username=" + username + ", password=" + password + ", enabled=" + enabled + "]";
+		return "User [username=" + username + ", password=" + password + ", enabled=" + enabled + ", userDetail="
+				+ userDetail + ", authorities=" + authorities + "]";
 	}
+
+	
 	
 
 }

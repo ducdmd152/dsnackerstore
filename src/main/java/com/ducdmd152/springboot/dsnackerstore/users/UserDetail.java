@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -15,6 +17,18 @@ public class UserDetail {
 	@Column(name="id")
 	private int id;
 	
+	@OneToOne
+	@JoinColumn(name = "username")
+	private User user;
+	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
 	@Column(name="fullname")
 	private String fullname;
 	
@@ -23,13 +37,7 @@ public class UserDetail {
 
 	public UserDetail() {
 	}
-
-	public UserDetail(int id, String fullname, String email) {
-		this.id = id;
-		this.fullname = fullname;
-		this.email = email;
-	}
-
+	
 	public int getId() {
 		return id;
 	}
@@ -37,7 +45,7 @@ public class UserDetail {
 	public void setId(int id) {
 		this.id = id;
 	}
-
+	
 	public String getFullname() {
 		return fullname;
 	}
@@ -56,8 +64,8 @@ public class UserDetail {
 
 	@Override
 	public String toString() {
-		return "UserDetail [id=" + id + ", fullname=" + fullname + ", email=" + email + "]";
+		return "UserDetail [id=" + id + ", user=" + user + ", fullname=" + fullname + ", email=" + email + "]";
 	}
-	
+
 	
 }
