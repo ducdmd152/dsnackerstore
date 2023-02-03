@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	 xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 <title>Homepage</title>
 <link
@@ -13,7 +14,8 @@
 		<font color="green">Welcome, </font>
 		<font color="green" th:text="${username}"></font>
 		<br>
-		<form action="#" th:action="@{/logout}" method="POST">
+		<a sec:authorize="isAnonymous()" th:href="@{/registration/showLogin}" class="btn btn-info btn-sm">Login</a>
+		<form action="#" th:action="@{/logout}" method="POST" sec:authorize="isAuthenticated()">
 			<button type="submit" class="btn btn-outline-info btn-sm">Logout</button>
 		</form>
 		<hr>

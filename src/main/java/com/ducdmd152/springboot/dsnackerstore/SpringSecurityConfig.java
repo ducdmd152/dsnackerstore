@@ -24,13 +24,20 @@ public class SpringSecurityConfig {
 //	Authentication by accounts in memory
 	@Bean
 	@Autowired
-	public AuthenticationManager authenticationManager(HttpSecurity http, DataSource datasource) 
+	public AuthenticationManager authenticationManager(HttpSecurity http, DataSource datasource, PasswordEncoder passwordEncoder) 
 	  throws Exception {
 	    return http.getSharedObject(AuthenticationManagerBuilder.class)
 	      .jdbcAuthentication().dataSource(datasource)
+	      .passwordEncoder(passwordEncoder)
 	      .and()
 	      .build();
 	}
+	
+	@Bean
+    public PasswordEncoder passwordEncoder() {
+        PasswordEncoder encoder = new BCryptPasswordEncoder();
+        return encoder;
+    }
 	
 //	Authentication by accounts in memory
 //	@Bean
@@ -60,23 +67,31 @@ public class SpringSecurityConfig {
 //	      .build();
 //	}
 //	
-//	@Bean
-//    public PasswordEncoder passwordEncoder() {
-//        PasswordEncoder encoder = new BCryptPasswordEncoder();
-//        return encoder;
-//    }
+
 	
 	@Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
-				.antMatchers("/shop/**").hasRole("CUSTOMER")
+				.antMatchers("/registration/**").anonymous()
+				.antMatchers("/guest/**").anonymous()
+				.antMatchers("/customer/**").hasRole("CUSTOMER")
+				.antMatchers("/employee/**").hasRole("EMPLOYEE")
+				.antMatchers("/owner/**").hasRole("OWNER")
+				.antMatchers("/shop/**").not().hasRole("OWNER")
 			.and()
 				.exceptionHandling().accessDeniedPage("/fail")
 			.and()
-				.formLogin().permitAll()
-//			.and()
-//				.logout().permitAll()
+				.formLogin()
+					.loginPage("/registration/showLogin")
+					.loginProcessingUrl("/authenticate")
+					.permitAll()
+				/*
+				 * .and() .formLogin() 
+				 * .loginProcessingUrl("authenticate") .permitAll()
+				 */
+			.and()
+				.logout().permitAll()
 			;
 		
 		return http.build();
