@@ -26,7 +26,7 @@ public class User {
 	
 	@Column(name="password")
 	@NotNull(message="Password is required.")
-	@Size(min = 8, max = 20, message="Password is required input from 8 to 20 characters")
+	@Size(min = 8, max = 72, message="Password is required input from 8 to 32 characters")
 	private String password;
 	
 	@Column(name="enabled")

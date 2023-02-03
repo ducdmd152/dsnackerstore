@@ -13,5 +13,10 @@ public class UserServiceImpl implements UserService {
 	public void saveUser(User user) {
 		userJpaRepositoy.save(user);
 	}
+
+	@Override
+	public boolean checkExist(String username) {
+		return userJpaRepositoy.existsById(username);
+	}
 	
 }

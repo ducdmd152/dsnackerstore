@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ducdmd152.springboot.dsnackerstore.users.Authority;
 import com.ducdmd152.springboot.dsnackerstore.users.User;
+import com.ducdmd152.springboot.dsnackerstore.users.UserDetail;
 import com.ducdmd152.springboot.dsnackerstore.users.UserService;
 
 @Controller
@@ -46,7 +47,9 @@ public class RegistrationController {
 	@GetMapping("/showRegister")
 	public String showRegister(Model model) {
 		User user = new User();
+		UserDetail userDetail = new UserDetail();
 		model.addAttribute("USER", user);
+		model.addAttribute("USER_DETAIL", userDetail);
 		return "raw/registration/register";
 	}
 
@@ -54,13 +57,21 @@ public class RegistrationController {
 	public String performRegister(
 			Model model,
 			@Valid @ModelAttribute("USER") User user,
-			BindingResult bindingResult) {
-		System.out.println(bindingResult.hasErrors());
-		if(bindingResult.hasErrors()) {			
+			BindingResult bindingUserResult,
+			@Valid @ModelAttribute("USER_DETAIL") UserDetail userDetail,
+			BindingResult bindingUserDetailResult) {
+//		System.out.println(bindingUserResult.hasErrors());
+//		System.out.println(bindingUserDetailResult.hasErrors());
+		if(bindingUserResult.hasErrors() || bindingUserDetailResult.hasErrors()) {			
+			return "raw/registration/register";
+		}
+		else if (userService.checkExist(user.getUsername())){
+			model.addAttribute("DUPLICATED_USERNAME_ERROR", true);
 			return "raw/registration/register";
 		}
 		else {
-			user.getUserDetail().setUser(user);
+			user.setUserDetail(userDetail);
+			userDetail.setUser(user);
 			Authority authority = new Authority("ROLE_CUSTOMER");
 			user.addAuthority(authority);
 

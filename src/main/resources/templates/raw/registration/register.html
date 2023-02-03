@@ -30,11 +30,11 @@
 
 									<div class="mb-3">
 										<label class="mb-2 text-muted" for="email">Your name</label> <input
-											type="text" th:field="*{userDetail.fullname}"
+											type="text" th:field="${USER_DETAIL.fullname}"
 											class="form-control">
 										<small class="text-danger fst-italic"
-											th:if="${#fields.hasErrors('userDetail.fullname')}"
-											th:errors="*{userDetail.fullname"/>
+											th:if="${#fields.hasErrors('${USER_DETAIL.fullname}')}"
+											th:errors="${USER_DETAIL.fullname}"/>
 										
 									</div>
 
@@ -44,6 +44,9 @@
 										<small class="text-danger fst-italic"
 											th:if="${#fields.hasErrors('username')}"
 											th:errors="*{username}"/>
+										<small class="text-danger fst-italic"
+											th:if="${DUPLICATED_USERNAME_ERROR}"
+											>Username is already exist.</small>
 									</div>
 
 									<div class="mb-3">
@@ -56,12 +59,12 @@
 									</div>
 
 									<div class="mb-3">
-										<label class="mb-2 text-muted" for="email">E-Mail</label> <input
-											type="email" th:field="*{userDetail.email}"
+										<label class="mb-2 text-muted" for="email">Email</label> <input
+											type="email" th:field="${USER_DETAIL.email}"
 											class="form-control">
 										<small class="text-danger fst-italic"
-											th:if="${#fields.hasErrors('userDetail.email')}"
-											th:errors="*{userDetail.email}"/>
+											th:if="${#fields.hasErrors('${USER_DETAIL.email}')}"
+											th:errors="${USER_DETAIL.email}"/>
 									</div>
 
 									<p class="form-text text-muted mb-3">By registering you

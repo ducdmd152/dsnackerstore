@@ -10,6 +10,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -39,7 +40,8 @@ public class UserDetail {
 	
 	@Column(name="email")
 	@NotNull(message="Email address is required.")
-	@Email(message="Wrong email format.")
+	@Pattern(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$",
+		message = "Wrong email format.")
 	private String email;
 
 	public UserDetail() {
