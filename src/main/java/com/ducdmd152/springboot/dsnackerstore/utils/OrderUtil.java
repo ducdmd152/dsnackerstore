@@ -48,48 +48,48 @@ public class OrderUtil {
 		return orderDetail;
 	}
 
-	public String orderDetailsToJSON(List<OrderDetail> orderDetails) {
-		if (orderDetails == null) {
-			return null;
-		}
-
-		String result = "[";
-		ObjectMapper mapper = new ObjectMapper();
-
-		boolean bef = false;
-		for (OrderDetail orderDetail : orderDetails) {
-			if (bef)
-				result += ",";
-			try {
-				result += mapper.writeValueAsString(orderDetail);
-			} catch (JsonProcessingException e) {
-				// mention to log
-				e.printStackTrace();
-			}
-			bef = true;
-		}
-
-		result = result + "]";
-		return result;
-	}
-
-	public List<OrderDetail> getOrderDetailsFromJSONString(String orderDetailsJSON) {
-		ObjectMapper mapper = new ObjectMapper();
-		List<OrderDetail> orderDetails = null;
-		try {
-			orderDetails = mapper.readValue(orderDetailsJSON, new TypeReference<List<OrderDetail>>() {
-			});
-			System.out.println("Mapping...");
-		} catch (JsonMappingException e) {
-			// mention to log
-			e.printStackTrace();
-		} catch (JsonProcessingException e) {
-			// mention to log
-			e.printStackTrace();
-		}
-
-		return orderDetails;
-	}
+//	public String orderDetailsToJSON(List<OrderDetail> orderDetails) {
+//		if (orderDetails == null) {
+//			return null;
+//		}
+//
+//		String result = "[";
+//		ObjectMapper mapper = new ObjectMapper();
+//
+//		boolean bef = false;
+//		for (OrderDetail orderDetail : orderDetails) {
+//			if (bef)
+//				result += ",";
+//			try {
+//				result += mapper.writeValueAsString(orderDetail);
+//			} catch (JsonProcessingException e) {
+//				// mention to log
+//				e.printStackTrace();
+//			}
+//			bef = true;
+//		}
+//
+//		result = result + "]";
+//		return result;
+//	}
+//
+//	public List<OrderDetail> getOrderDetailsFromJSONString(String orderDetailsJSON) {
+//		ObjectMapper mapper = new ObjectMapper();
+//		List<OrderDetail> orderDetails = null;
+//		try {
+//			orderDetails = mapper.readValue(orderDetailsJSON, new TypeReference<List<OrderDetail>>() {
+//			});
+//			System.out.println("Mapping...");
+//		} catch (JsonMappingException e) {
+//			// mention to log
+//			e.printStackTrace();
+//		} catch (JsonProcessingException e) {
+//			// mention to log
+//			e.printStackTrace();
+//		}
+//
+//		return orderDetails;
+//	}
 
 	public boolean checkValidOrder(Order order) {
 		List<OrderDetail> orderDetails = order.getOrderDetails();
