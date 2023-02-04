@@ -34,7 +34,6 @@ public class CartController {
         CartModel cart = (CartModel) session.getAttribute("CART");
         if (cart == null) {
             cart = applicationContext.getBean(CartModel.class);
-            System.out.println("Product Service: " + cart.getProductService());
         }
         //3. Cust chooses a specific item
         // productId

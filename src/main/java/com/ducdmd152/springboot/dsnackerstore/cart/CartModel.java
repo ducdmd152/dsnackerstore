@@ -12,14 +12,17 @@ import org.springframework.stereotype.Component;
 import com.ducdmd152.springboot.dsnackerstore.product.Product;
 import com.ducdmd152.springboot.dsnackerstore.product.ProductModel;
 import com.ducdmd152.springboot.dsnackerstore.product.ProductService;
+import com.ducdmd152.springboot.dsnackerstore.utils.ProductUtil;
 
 @Component
 @Scope("prototype")
 public class CartModel {
+	private Map<String, Integer> items;
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private ProductUtil productUtil;
 	
-	private Map<String, Integer> items;
 
 	
     public CartModel() {
@@ -87,13 +90,12 @@ public class CartModel {
         if (this.items == null) {
             return;
         }
-
+        
         for (String sku : this.items.keySet()) {
             
-            int orderedQuantity = orderDetailService.getOrderedQuantityOf(sku);            
-            Product product = productService.getProduct(sku);
-            int availableQuantity =  product.getQuantity() - orderedQuantity;
+            ProductModel productModel = productUtil.getProductSyncOrderedQuantity(sku);
             
+            int availableQuantity = productModel.getQuantity();
             int quantityInCart = this.items.get(sku);          
             
             int updatedQuantityInCart = Integer.min(availableQuantity, quantityInCart);
