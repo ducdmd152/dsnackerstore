@@ -4,15 +4,19 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-//@Entity
-//@Table(name="order")
+@Entity
+@Table(name="`order`")
 public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +29,7 @@ public class Order {
 	@Column(name="total")
     private float total;
 	
-	@Column(name="name")
+	@Column(name="`name`")
     private String name;
 	
 	@Column(name="address")
@@ -36,7 +40,9 @@ public class Order {
 
 	@Column(name="username")
     private String username;
-
+	
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "order_id")
 	private List<OrderDetail> orderDetails;
 	public void addOrderDetail(OrderDetail orderDetail) {
 		if(orderDetail==null) {
@@ -46,9 +52,9 @@ public class Order {
 		if(orderDetails==null) {
 			orderDetails = new ArrayList<>();
 		}
-		
+		total+=orderDetail.getTotal();
 		orderDetails.add(orderDetail);
-		orderDetail.setOrderId(id);
+//		orderDetail.setOrderId(id);
 	}
 	
 	public List<OrderDetail> getOrderDetails() {

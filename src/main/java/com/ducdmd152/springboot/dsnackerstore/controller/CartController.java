@@ -1,5 +1,6 @@
 package com.ducdmd152.springboot.dsnackerstore.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -107,10 +108,24 @@ public class CartController {
 		if (session != null) {
 			cart = (CartModel) session.getAttribute("CART");
 			if(cart != null) {
+//				Order order = orderUtil.genOrderBy(cart, checkedItems);
+//				String orderDetailsJSON = orderUtil.orderDetailsToJSON(order.getOrderDetails());
+//				model.addAttribute("ORDER", order);
+//				model.addAttribute("ORDER_DETAILS_JSON", orderDetailsJSON);
+				
 				Order order = orderUtil.genOrderBy(cart, checkedItems);
-				String orderDetailsJSON = orderUtil.orderDetailsToJSON(order.getOrderDetails());
+				
+				// create a new prepared order, and save in session
+				HashMap<Integer, Order> preparedOrders = (HashMap<Integer, Order>) session.getAttribute("PREPARED_ORDERS");
+				if(preparedOrders==null) {
+					preparedOrders= new HashMap<>();
+					session.setAttribute("PREPARED_ORDERS", preparedOrders);
+				}
+				preparedOrders.put(order.hashCode(), order);
+				
+				// send to view
 				model.addAttribute("ORDER", order);
-				model.addAttribute("ORDER_DETAILS_JSON", orderDetailsJSON);
+				model.addAttribute("PREPARED_ORDER_KEY", order.hashCode());
 				
 				return "raw/cart/checkout";
 			}

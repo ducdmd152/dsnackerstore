@@ -7,8 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-//@Entity
-//@Table(name = "order_detail")
+@Entity
+@Table(name = "order_detail")
 public class OrderDetail {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,8 +27,8 @@ public class OrderDetail {
 	@Column(name="total")
 	private float total;
 	
-	@Column(name="order_id")
-	private int orderId;
+//	@Column(name="order_id")
+//	private int orderId;
 
 	public OrderDetail() {
 	}
@@ -73,18 +73,18 @@ public class OrderDetail {
 		this.total = total;
 	}
 
-	public int getOrderId() {
-		return orderId;
-	}
-
-	public void setOrderId(int orderId) {
-		this.orderId = orderId;
-	}
+//	public int getOrderId() {
+//		return orderId;
+//	}
+//
+//	public void setOrderId(int orderId) {
+//		this.orderId = orderId;
+//	}
 
 	@Override
 	public String toString() {
 		return "{id=" + id + ", sku=" + sku + ", price=" + price + ", quantity=" + quantity + ", total="
-				+ total + ", orderId=" + orderId + "}";
+				+ total + "}";
 	}
 	
 	
