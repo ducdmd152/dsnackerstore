@@ -8,7 +8,7 @@ public interface ProductService {
 
 //	public void saveProduct(Product product);
 
-//	public Product getProduct(String sku);
+	public Product getProduct(String sku);
 
 //	public void deleteProduct(String sku);
 }
