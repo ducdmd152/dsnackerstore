@@ -83,30 +83,27 @@ public class CartModel {
         }
     }
 
-    public void refresh() {
+    public void refresh() { // sync the data in web-tier with persistence-tier
         if (this.items == null) {
             return;
         }
 
-//        ProductDAO productDAO = new ProductDAO();
-//        OrderDetailsDAO orderDetailsDAO = new OrderDetailsDAO();
-//
-//        for (String sku : this.items.keySet()) {
-//            
-//            int orderedQuantity = orderDetailsDAO.getOrderedQuantityOf(sku);            
-//            ProductDTO dto = productDAO.getProduct(sku);
-//            int restQuantity = dto.getQuantity() - orderedQuantity;
-//            
-//            int quantityInCart = this.items.get(sku);          
-//            
-//            int updateQuantityInCart = Integer.min(restQuantity, quantityInCart);
-//            
-//            if (updateQuantityInCart == 0) { // remove
-//                this.removeItemFromCart(sku);
-//            } else { // update
-//                this.items.put(sku, updateQuantityInCart);
-//            }
-//        }
+        for (String sku : this.items.keySet()) {
+            
+            int orderedQuantity = orderDetailService.getOrderedQuantityOf(sku);            
+            Product product = productService.getProduct(sku);
+            int availableQuantity =  product.getQuantity() - orderedQuantity;
+            
+            int quantityInCart = this.items.get(sku);          
+            
+            int updatedQuantityInCart = Integer.min(availableQuantity, quantityInCart);
+            
+            if (updatedQuantityInCart == 0) { // remove
+                this.removeItemFromCart(sku);
+            } else { // update
+                this.items.put(sku, updatedQuantityInCart);
+            }
+        }
     }
 
     public List<ProductModel> getSelectedProductsInCart(String[] selectedItems) {
