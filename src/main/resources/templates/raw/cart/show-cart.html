@@ -27,9 +27,10 @@
 		<a th:href="@{/shop/list}" class="btn btn-primary btn">Back to
 			shop</a>
 		<hr>
-		<form th:action="@{/registration/performRegister}" method="POST">
+		<form th:action="@{/cart/performSelectedItems}" method="POST">
 			<table class="table table-bordered table-striped">
 				<thead class="table-dark">
+					<th></th>
 					<th>SKU</th>
 					<th>Name</th>
 					<th>Description</th>
@@ -41,6 +42,10 @@
 
 				<tbody>
 					<tr th:each="product : ${PRODUCTS_IN_CART}">
+						<td>
+							<input type="checkbox" name="checkedItems"
+                                           th:value="${product.sku}" />
+						</td>
 						<td th:text="${product.sku}" />
 						<td th:text="${product.name}" />
 						<td th:text="${product.description}" />
@@ -60,13 +65,32 @@
 													<i class="fa fa-trash"></i>
 												</button>
 										</a></td>
-
-										<td>Checkout</td>
 									</tr>
 
 								</tbody>
 							</table>
 						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<table class="table table-bordered table-striped">
+				<thead>
+					<th></th>
+					<th></th>
+				</thead>
+				<tbody>
+					<tr>
+						<td colspan="2" align="center">
+							<button type="submit"
+							name="action" value="checkout"
+							 class="btn btn-outline-primary">Checkout</button>
+						<td>
+						<td colspan="2" align="center">
+							<button type="submit"
+							name="action" value="delete"
+							class="btn btn-outline-danger">Delete</button>
+						<td>
 					</tr>
 				</tbody>
 			</table>
