@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Shopping</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+	crossorigin="anonymous">
+<link
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+	rel="stylesheet">
+</head>
+
+<body>
+	<div class="container">
+		<h3>Your Cart</h3>
+		<hr>
+
+		<!-- Add a button -->
+		<!-- 		<a th:href="@{/customers/showFormForAdd}"
+			class="btn btn-primary btn-sm mb-3">
+			Add Customer
+		</a> -->
+
+		<a th:href="@{/shop/list}" class="btn btn-primary btn">Back to
+			shop</a>
+		<hr>
+		<form th:action="@{/registration/performRegister}" method="POST">
+			<table class="table table-bordered table-striped">
+				<thead class="table-dark">
+					<th>SKU</th>
+					<th>Name</th>
+					<th>Description</th>
+					<th>Price</th>
+					<th>Quantity</th>
+					<th>Total</th>
+					<th>Actions</th>
+				</thead>
+
+				<tbody>
+					<tr th:each="product : ${PRODUCTS_IN_CART}">
+						<td th:text="${product.sku}" />
+						<td th:text="${product.name}" />
+						<td th:text="${product.description}" />
+						<td th:text="${product.price}" />
+						<td th:text="${product.quantity}" />
+						<td th:text="${product.total}" />
+						<td>
+							<table  class="table table-bordered table-striped">
+								<tbody>
+									<tr>
+										<td><a
+											th:href="@{/cart/removeOutCart(productId=${product.sku})}"
+											onclick="if (!confirm('Are you sure you want to delete this employee?')) return false"
+											)>
+												<button class="" type="button" style="color: red;"
+													data-toggle="tooltip" data-placement="top" title="Delete">
+													<i class="fa fa-trash"></i>
+												</button>
+										</a></td>
+
+										<td>Checkout</td>
+									</tr>
+
+								</tbody>
+							</table>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+
+		<hr>
+		<form action="#" th:action="@{/logout}" method="POST">
+			<button type="submit" class="btn btn-outline-info">Logout</button>
+		</form>
+		<hr>
+		<a href="/" class=""> Back to home </a>
+	</div>
+
+</body>
+
+</html>

@@ -1,6 +1,7 @@
 package com.ducdmd152.springboot.dsnackerstore.product;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,5 +21,21 @@ public class ProductServiceJpaRepositoryImpl
 	@Override
 	public List<Product> getAvailableProducts() {
 		return productJpaRepository.findAllByStatus(true);
+	}
+
+	@Override
+	public Product getProduct(String sku) {
+		Optional<Product> result = productJpaRepository.findById(sku);
+		Product product = null;
+		
+		if(result.isPresent()) {
+			product =  result.get();
+		}
+		else {
+			// we didn't find the employee
+//			throw new RuntimeException("Did not find employee id - " + theId);
+			// do nothing to return null
+		}
+		return product;
 	}	
 }
