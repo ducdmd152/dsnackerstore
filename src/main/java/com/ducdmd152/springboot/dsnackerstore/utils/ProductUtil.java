@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.ducdmd152.springboot.dsnackerstore.cart.CartModel;
+import com.ducdmd152.springboot.dsnackerstore.order.OrderDetailService;
 import com.ducdmd152.springboot.dsnackerstore.product.Product;
 import com.ducdmd152.springboot.dsnackerstore.product.ProductModel;
 import com.ducdmd152.springboot.dsnackerstore.product.ProductService;
@@ -16,6 +17,8 @@ import com.ducdmd152.springboot.dsnackerstore.product.ProductService;
 public class ProductUtil {
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private OrderDetailService orderDetailService;
 	
 	public ProductModel productToProductModel(Product product) {
 		ProductModel productModel = new ProductModel();
@@ -31,9 +34,10 @@ public class ProductUtil {
 		ProductModel productModel = productToProductModel(product);
 		
 		// 2. Sync Sync data for real quantity with ordered order
-//		int orderedQuantity = orderDetailService.getOrderedQuantityOf(sku);            
-//        ProductModel product = productService.getProduct(sku);
-//        int availableQuantity =  product.getQuantity() - orderedQuantity;
+		int orderedQuantity = orderDetailService.getOrderedQuantityOf(productModel.getSku());            
+		int availableQuantity =  productModel.getQuantity() - orderedQuantity;
+		
+		productModel.setQuantity(availableQuantity);
 		
 		return productModel;
 	}
@@ -51,14 +55,12 @@ public class ProductUtil {
         	}
         	
         	// 2. Sync data for real quantity with ordered order
-//          OrderDetailsDAO orderDetailsDAO = new OrderDetailsDAO();
-//          
-//          for(ProductDTO dto : dtos) {
-//              int orderedQuantity = orderDetailsDAO.getOrderedQuantityOf(dto.getSku());
-//              int restQuantity = dto.getQuantity() - orderedQuantity;
-//              
-//              dto.setQuantity(restQuantity);
-//          }
+          for(ProductModel product : result) {
+	    		int orderedQuantity = orderDetailService.getOrderedQuantityOf(product.getSku());            
+	    		int availableQuantity =  product.getQuantity() - orderedQuantity;
+	    		
+	    		product.setQuantity(availableQuantity);
+          }
         }
         
 		return result;
