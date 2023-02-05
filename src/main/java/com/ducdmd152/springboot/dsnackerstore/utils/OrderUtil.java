@@ -93,6 +93,9 @@ public class OrderUtil {
 
 	public boolean checkValidOrder(Order order) {
 		List<OrderDetail> orderDetails = order.getOrderDetails();
+		if(orderDetails == null) {
+			return false;
+		}
 
 		for (OrderDetail orderDetail : orderDetails) {
 			int requestQuantity = orderDetail.getQuantity();

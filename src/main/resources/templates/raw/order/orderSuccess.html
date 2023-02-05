@@ -21,10 +21,20 @@
 		<a th:href="@{/cart/viewCart}" class="btn btn-outline-primary btn">Back
 			to cart</a>
 		<hr>
+
+		<div class="mb-3">
+			<label class="mb-2 text-muted" for="id">Order Id</label>
+			<p th:text="${ORDER.id}" class="form-control"/>
+		</div>
+
+		<div class="mb-3">
+			<label class="mb-2 text-muted" for="date_buy">Date Time</label>
+			<p th:text="${ORDER.dateBuy}" class="form-control"/>
+		</div>
+		
 		<div class="mb-3">
 			<label class="mb-2 text-muted" for="name">Your name</label>
 			<p th:text="${ORDER.name}" class="form-control">
-
 		</div>
 
 		<div class="mb-3">

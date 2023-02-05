@@ -14,6 +14,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="`order`")
@@ -30,12 +33,19 @@ public class Order {
     private float total;
 	
 	@Column(name="`name`")
+	@NotNull(message="Name is required to contact.")
+	@Size(min = 3, max = 32, message = "Name is too short or too long, required from 3-32 chars.")
     private String name;
 	
 	@Column(name="address")
+	@NotNull(message="Address is required for delivery.")
+	@Size(min = 4, max = 399, message = "Address need be specific enough for delivery.")
     private String address;
 	
 	@Column(name="phone")
+	@NotNull(message="Phone number is required to contact & confirm.")
+	@Pattern(regexp = "^[0-9]{10,12}$", 
+			message = "Phone number is required for 10-12 digits.")
     private String phone;
 
 	@Column(name="username")

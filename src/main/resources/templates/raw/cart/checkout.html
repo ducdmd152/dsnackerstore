@@ -29,16 +29,19 @@
 		<hr>
 		<form th:action="@{/order/makeOrder}" th:object="${ORDER}"
 			method="POST" class="needs-validation">
+			
 			<div class="mb-3">
 				<label class="mb-2 text-muted" for="name">Your name</label> <input
-					th:field="*{name}" class="form-control"> <small
+					th:field="*{name}" class="form-control">
+					<small
 					class="text-danger fst-italic" th:if="${#fields.hasErrors('name')}"
 					th:errors="*{name}" />
 			</div>
 
 			<div class="mb-3">
 				<label class="mb-2 text-muted" for="phone">Phone</label> <input
-					type="text" th:field="*{phone}" class="form-control"> <small
+					type="text" th:field="*{phone}" class="form-control">
+					<small
 					class="text-danger fst-italic"
 					th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" />
 			</div>

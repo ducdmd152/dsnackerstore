@@ -88,7 +88,7 @@ public class CartController {
 	}
 
 	@PostMapping("/performSelectedItems")
-	public String performSelectedItems(Model model, @RequestParam String[] checkedItems, @RequestParam String action) {
+	public String performSelectedItems(Model model, @RequestParam(required = false) String[] checkedItems, @RequestParam String action) {
 		if (checkedItems == null) {
 			return "redirect:/cart/viewCart";
 		} else if (action.equals("checkout")) {
@@ -101,9 +101,9 @@ public class CartController {
 	}
 
 	@PostMapping("/checkout")
-	public String performSelectedItems(HttpServletRequest request, Model model, @RequestParam String[] checkedItems) {
+	public String performSelectedItems(HttpSession session, Model model,
+			@RequestParam String[] checkedItems) {
 		// 1. Get session & cart (if exist)
-		HttpSession session = request.getSession(false);
 		CartModel cart = null;
 		if (session != null) {
 			cart = (CartModel) session.getAttribute("CART");
@@ -132,5 +132,21 @@ public class CartController {
 		}
 
 		return null;
+	}
+
+	@PostMapping("/deleteSelectedItems")
+	public String deleteSelectedItems(
+			Model model,
+			HttpSession session,
+			@RequestParam String[] checkedItems
+			) {
+		CartModel cart = (CartModel) session.getAttribute("CART");
+		if(cart != null) {
+			for(String sku : checkedItems) {
+				cart.removeItemFromCart(sku);
+			}
+		}
+		
+		return "redirect:/cart/viewCart";
 	}
 }
