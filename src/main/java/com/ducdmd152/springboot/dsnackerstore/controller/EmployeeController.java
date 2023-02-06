@@ -97,8 +97,32 @@ public class EmployeeController {
 		return "raw/employee/showProducts";
 	}
 	
+	@GetMapping("/showCreateProduct")
+	public String showCreateProduct(
+			Model model
+			) {
+		Product product = new Product();
+//		ProductModel product = productUtil.getProductSyncOrderedQuantity(id);
+		
+		model.addAttribute("PRODUCT", product);
+		
+		return "raw/employee/showCreateProduct";
+	}
+	
+	@PostMapping("/createProduct")
+	public String createProduct(
+			Model model,
+			@Valid @ModelAttribute("PRODUCT") Product product,
+			BindingResult bindingResult
+			) {
+		productService.saveProduct(product);
+		model.addAttribute("PRODUCT", product);
+		
+		return "raw/employee/showEditProduct";
+	}
+	
 	@GetMapping("/showEditProduct")
-	public String editProduct(
+	public String showEditProduct(
 			Model model,
 			@RequestParam String id
 			) {
