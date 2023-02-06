@@ -2,25 +2,46 @@ package com.ducdmd152.springboot.dsnackerstore.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ducdmd152.springboot.dsnackerstore.order.Order;
-import com.ducdmd152.springboot.dsnackerstore.order.OrderDetail;
-import com.ducdmd152.springboot.dsnackerstore.order.OrderDetailService;
 import com.ducdmd152.springboot.dsnackerstore.order.OrderService;
+import com.ducdmd152.springboot.dsnackerstore.product.Product;
+import com.ducdmd152.springboot.dsnackerstore.product.ProductModel;
+import com.ducdmd152.springboot.dsnackerstore.product.ProductService;
+import com.ducdmd152.springboot.dsnackerstore.utils.ProductUtil;
 
 @Controller
 @RequestMapping("/employee")
 public class EmployeeController {
 	@Autowired
 	private OrderService orderService;
+	@Autowired
+	private ProductService productService;
+	@Autowired
+	private ProductUtil productUtil;
 	
+	@InitBinder
+	public void trimValueOfParameters(WebDataBinder dataBinder) {
+		StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
+
+		dataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
+	}
+	
+	// orders management
 	@GetMapping("/showOrders")
 	public String showOrders(
 			Model model,
@@ -62,5 +83,42 @@ public class EmployeeController {
 		orderService.saveOrder(order);
 		
 		return "redirect:/employee/showOrderDetails?orderId=" + id;
+	}
+
+	// products management
+	@GetMapping("/showProducts")
+	public String showProducts(
+			Model model
+			) {
+		List<Product> products = productService.getProducts();
+		
+		model.addAttribute("PRODUCTS", products);
+		
+		return "raw/employee/showProducts";
+	}
+	
+	@GetMapping("/showEditProduct")
+	public String editProduct(
+			Model model,
+			@RequestParam String id
+			) {
+		Product product = productService.getProduct(id);
+//		ProductModel product = productUtil.getProductSyncOrderedQuantity(id);
+		
+		model.addAttribute("PRODUCT", product);
+		
+		return "raw/employee/showEditProduct";
+	}
+	
+	@PostMapping("/editProduct")
+	public String editProduct(
+			Model model,
+			@Valid @ModelAttribute("PRODUCT") Product product,
+			BindingResult bindingResult
+			) {
+		productService.saveProduct(product);
+		model.addAttribute("PRODUCT", product);
+		
+		return "raw/employee/showEditProduct";
 	}
 }

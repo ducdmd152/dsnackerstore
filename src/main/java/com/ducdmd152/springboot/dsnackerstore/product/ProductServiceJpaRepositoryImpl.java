@@ -37,5 +37,10 @@ public class ProductServiceJpaRepositoryImpl
 			// do nothing to return null
 		}
 		return product;
+	}
+
+	@Override
+	public void saveProduct(Product product) {
+		productJpaRepository.save(product);
 	}	
 }

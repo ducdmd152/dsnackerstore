@@ -28,10 +28,18 @@
 			<a href="/employee/showOrders?status=confirmed">Show confirmed orders</a><br>
 			<a href="/employee/showOrders?status=unaccepted">Show unaccepted orders</a><br>
     	</div>
-		<hr>
+		<div sec:authorize="isAnonymous()">
+			<hr>
+			<a href="/shop/list">Shopping Now</a>
+    	</div>
+    	
+		<div th:if="${#authorization.expression('hasAuthority(''ROLE_CUSTOMER'')')}">
+			<hr>
+			<a href="/shop/list">Shopping Now</a>
+    	</div>
 
 		<hr>
-		<a href="/shop/list">Shopping Now</a>
+		
 	</div>
 </body>
 </html>
