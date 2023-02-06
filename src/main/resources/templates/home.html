@@ -20,8 +20,14 @@
 		</form>
 		<hr>
 		<h1>Homepage</h1>
-		<hr>
 		
+		<div th:if="${#authorization.expression('hasAuthority(''ROLE_EMPLOYEE'')')}">
+			<hr>
+			<a href="/employee/showOrders">Show orders</a><br>
+			<a href="/employee/showOrders?status=pending">Show orders in queue</a><br>
+			<a href="/employee/showOrders?status=confirmed">Show confirmed orders</a><br>
+			<a href="/employee/showOrders?status=unaccepted">Show unaccepted orders</a><br>
+    	</div>
 		<hr>
 
 		<hr>

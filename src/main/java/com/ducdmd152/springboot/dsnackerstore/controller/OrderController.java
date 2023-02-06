@@ -86,8 +86,11 @@ public class OrderController {
 			model.addAttribute("ERROR_MASSAGE", "The order is NOT proper"
 					+ ", may be someone else bought before you that make haven't enough quantiy for your order.\n"
 					+ "Please try again.");
+			// update the order's info
 			// record time for order
 			order.setDateBuy(new Timestamp(System.currentTimeMillis()));
+			// set status
+			order.setStatus("pending");
 			
 			// save into database
 			orderService.saveOrder(order);
@@ -111,30 +114,6 @@ public class OrderController {
 			return "raw/order/orderFail";
 		}
 	}
-	
-//	@PostMapping("/makeOrder")
-//	public String makeOrder(
-//			Model model,
-//			@Valid @ModelAttribute("ORDER") Order order,
-//			BindingResult bindingOrderResult,
-//			@RequestParam String orderDetailsJSON
-//			) {
-//		List<OrderDetail> orderDetails = orderUtil.getOrderDetailsFromJSONString(orderDetailsJSON) ;
-//		
-//		for(OrderDetail orderDetail : orderDetails) {
-//			order.addOrderDetail(orderDetail);
-//		}
-//		
-//		if(orderUtil.checkValidOrder(order)) {
-//			order.setDateBuy(new Timestamp(System.currentTimeMillis()));
-//			orderService.saveOrder(order);
-//			model.addAttribute("ORDER", order);
-//			return "raw/order/orderSuccess";
-//		}
-//		else {
-//			return "raw/order/orderFail";
-//		}
-//	}
 	
 	
 }
