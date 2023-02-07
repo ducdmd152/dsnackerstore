@@ -90,7 +90,8 @@ public class EmployeeController {
 	public String showProducts(
 			Model model
 			) {
-		List<Product> products = productService.getProducts();
+//		List<Product> products = productService.getProducts();
+		List<ProductModel> products = productUtil.getProductsSyncOrderedQuantity();
 		
 		model.addAttribute("PRODUCTS", products);
 		
@@ -115,10 +116,21 @@ public class EmployeeController {
 			@Valid @ModelAttribute("PRODUCT") Product product,
 			BindingResult bindingResult
 			) {
+		if(bindingResult.hasErrors()) {
+			model.addAttribute("PRODUCT", product);
+			return "raw/employee/showCreateProduct";
+		}
+		
+		if(productService.checkExist(product.getSku())) {
+			model.addAttribute("PRODUCT", product);
+			model.addAttribute("DUPLICATED_SKU_ERROR", true);
+			return "raw/employee/showCreateProduct";
+		}
+		
 		productService.saveProduct(product);
 		model.addAttribute("PRODUCT", product);
 		
-		return "raw/employee/showEditProduct";
+		return "redirect:/employee/showEditProduct?id=" + product.getSku();
 	}
 	
 	@GetMapping("/showEditProduct")
@@ -126,8 +138,8 @@ public class EmployeeController {
 			Model model,
 			@RequestParam String id
 			) {
-		Product product = productService.getProduct(id);
-//		ProductModel product = productUtil.getProductSyncOrderedQuantity(id);
+//		Product product = productService.getProduct(id);
+		ProductModel product = productUtil.getProductSyncOrderedQuantity(id);
 		
 		model.addAttribute("PRODUCT", product);
 		
@@ -137,12 +149,17 @@ public class EmployeeController {
 	@PostMapping("/editProduct")
 	public String editProduct(
 			Model model,
-			@Valid @ModelAttribute("PRODUCT") Product product,
+			@Valid @ModelAttribute("PRODUCT") ProductModel productModel,
 			BindingResult bindingResult
 			) {
-		productService.saveProduct(product);
-		model.addAttribute("PRODUCT", product);
+		if(bindingResult.hasErrors()) {
+			model.addAttribute("PRODUCT", productModel);
+			return "raw/employee/showEditProduct";
+		}
 		
-		return "raw/employee/showEditProduct";
+		Product product = productUtil.syncEditedProductModelToProduct(productModel);
+		productService.saveProduct(product);
+		
+		return "redirect:/employee/showEditProduct?id=" + product.getSku();
 	}
 }

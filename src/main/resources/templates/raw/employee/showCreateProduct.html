@@ -38,7 +38,9 @@
 											type="text" th:field="*{sku}" class="form-control"> <small
 											class="text-danger fst-italic"
 											th:if="${#fields.hasErrors('*{sku}')}" th:errors="*{sku}" />
-
+										<small class="text-danger fst-italic"
+											th:if="${DUPLICATED_SKU_ERROR}"
+											>Sku is already exist.</small>
 									</div>
 
 									<div class="mb-3">

@@ -2,90 +2,85 @@ package com.ducdmd152.springboot.dsnackerstore.product;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.beans.factory.annotation.Value;
+
 public class ProductModel implements Serializable { /// ~ a model use in bussiness logic-tier (not mapping), use to present product in cart,  and product in order prepared
-    private String sku;
+    @NotNull(message="Sku is required.")
+	private String sku;
+    
+    @NotNull(message="Sku is required.")
     private String name;
+    
+    
     private String description;
+    
+    @NotNull(message="Quantity is required.")
+    @Min(value=0, message="Quantity is requried not less than 0.")
     private int quantity;
+    
+    @NotNull(message="Quantity is required.")
+    @Min(value=0, message="Price is requried not less than 0.")
     private float price;
+    
+    @NotNull(message="Please, select the status of the product.")
+    private boolean status = true;
 
     public ProductModel() {
     }
+    
+    
+    
+    public ProductModel(String sku,
+			String name, String description,
+			int quantity, float price) {
+		this.sku = sku;
+		this.name = name;
+		this.description = description;
+		this.quantity = quantity;
+		this.price = price;
+	}
 
-    public ProductModel(String sku, String name, String description, int quantity, float price) {
-        this.sku = sku;
-        this.name = name;
-        this.description = description;
-        this.quantity = quantity;
-        this.price = price;
-    }
 
-    /**
-     * @return the sku
-     */
-    public String getSku() {
+
+	public String getSku() {
         return sku;
     }
-
-    /**
-     * @param sku the sku to set
-     */
+    
     public void setSku(String sku) {
         this.sku = sku;
     }
-
-    /**
-     * @return the name
-     */
+    
     public String getName() {
         return name;
     }
-
-    /**
-     * @param name the name to set
-     */
+    
     public void setName(String name) {
         this.name = name;
     }
-
-    /**
-     * @return the description
-     */
+    
     public String getDescription() {
         return description;
     }
-
-    /**
-     * @param description the description to set
-     */
+    
     public void setDescription(String description) {
         this.description = description;
     }
-
-    /**
-     * @return the quantity
-     */
+    
     public int getQuantity() {
         return quantity;
     }
-
-    /**
-     * @param quantity the quantity to set
-     */
+    
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-
-    /**
-     * @return the price
-     */
+    
     public float getPrice() {
         return price;
     }
-
-    /**
-     * @param price the price to set
-     */
+    
     public void setPrice(float price) {
         this.price = price;
     }
@@ -94,7 +89,16 @@ public class ProductModel implements Serializable { /// ~ a model use in bussine
         return this.quantity*this.price;
     }
 
-    @Override
+    
+    public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+
+	@Override
     public String toString() {
         return "[ " + sku + " " + name + " " + description + " " + quantity + " " + price + "]"; //To change body of generated methods, choose Tools | Templates.
     }

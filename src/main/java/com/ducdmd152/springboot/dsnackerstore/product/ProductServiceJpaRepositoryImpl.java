@@ -22,6 +22,11 @@ public class ProductServiceJpaRepositoryImpl
 	public List<Product> getAvailableProducts() {
 		return productJpaRepository.findAllByStatus(true);
 	}
+	
+	@Override
+	public List<Product> getProductsByStatus(boolean status) {
+		return productJpaRepository.findAllByStatus(status);
+	}	
 
 	@Override
 	public Product getProduct(String sku) {
@@ -42,5 +47,13 @@ public class ProductServiceJpaRepositoryImpl
 	@Override
 	public void saveProduct(Product product) {
 		productJpaRepository.save(product);
-	}	
+	}
+
+	@Override
+	public boolean checkExist(String sku) {
+		Optional<Product> result = productJpaRepository.findById(sku);
+		return result.isPresent();
+	}
+
+
 }

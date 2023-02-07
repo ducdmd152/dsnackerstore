@@ -34,8 +34,13 @@
 
 
 									<div class="mb-3">
-										<label class="mb-2 text-muted" for="email">Sku</label> <input
+										<label class="mb-2 text-muted" for="email">Sku</label>
+										<input disabled
 											type="text" th:field="*{sku}" class="form-control"> <small
+											class="text-danger fst-italic"
+											th:if="${#fields.hasErrors('*{sku}')}" th:errors="*{sku}" />
+										<input 
+											type="hidden" th:field="*{sku}" class="form-control"> <small
 											class="text-danger fst-italic"
 											th:if="${#fields.hasErrors('*{sku}')}" th:errors="*{sku}" />
 

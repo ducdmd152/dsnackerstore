@@ -12,6 +12,8 @@ public interface ProductService {
 
 	public Product getProduct(String sku);
 	public void saveProduct(Product product);
+	public List<Product> getProductsByStatus(boolean status);
+	public boolean checkExist(String sku);
 
 //	public void deleteProduct(String sku);
 }
