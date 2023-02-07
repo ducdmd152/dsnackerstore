@@ -51,6 +51,9 @@ public class Order {
 	@Column(name="username")
     private String username;
 	
+	@Column(name="status")
+    private String status;
+	
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "order_id")
 	private List<OrderDetail> orderDetails;
@@ -133,6 +136,15 @@ public class Order {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	@Override

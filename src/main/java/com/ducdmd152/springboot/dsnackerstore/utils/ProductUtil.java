@@ -27,8 +27,21 @@ public class ProductUtil {
 		productModel.setDescription(product.getDescription());
 		productModel.setPrice(product.getPrice());
 		productModel.setQuantity(product.getQuantity());
+		productModel.setStatus(product.isStatus());
 		return productModel;
 	}
+	
+	public Product productModelToProduct(ProductModel productModel) {
+		Product product = new Product();
+		product.setSku(productModel.getSku());
+		product.setName(productModel.getName());
+		product.setDescription(productModel.getDescription());
+		product.setPrice(productModel.getPrice());
+		product.setQuantity(productModel.getQuantity());
+		product.setStatus(productModel.isStatus());
+		return product;
+	}
+	
 	public ProductModel getProductSyncOrderedQuantity(String sku) {
 		Product product = productService.getProduct(sku);
 		ProductModel productModel = productToProductModel(product);
@@ -42,8 +55,32 @@ public class ProductUtil {
 		return productModel;
 	}
 	
-	public List<ProductModel> getProductsSyncOrderedQuantity() {
+	public List<ProductModel> getAvailableProductsSyncOrderedQuantity() {
         List<Product> products = productService.getAvailableProducts();
+        List<ProductModel> result = null;
+        if(products != null) {
+        	// 1. Convert entities to models
+        	result = new ArrayList<>();
+        	for(Product product : products) {
+        		ProductModel productModel = productToProductModel(product);
+        		
+        		result.add(productModel);
+        	}
+        	
+        	// 2. Sync data for real quantity with ordered order
+          for(ProductModel product : result) {
+	    		int orderedQuantity = orderDetailService.getOrderedQuantityOf(product.getSku());            
+	    		int availableQuantity =  product.getQuantity() - orderedQuantity;
+	    		
+	    		product.setQuantity(availableQuantity);
+          }
+        }
+        
+		return result;
+	}
+	
+	public List<ProductModel> getProductsSyncOrderedQuantity() {
+        List<Product> products = productService.getProducts();
         List<ProductModel> result = null;
         if(products != null) {
         	// 1. Convert entities to models
@@ -67,9 +104,9 @@ public class ProductUtil {
 	}
 
 	public List<ProductModel> getProductsSyncOrderedQuantitySyncCart(CartModel cart) {
-        List<ProductModel> result = this.getProductsSyncOrderedQuantity();
+        List<ProductModel> result = this.getAvailableProductsSyncOrderedQuantity();
         if(cart!=null) {
-        	cart.refresh(); // re-fix for proper with real quantity in DB
+//        	cart.refresh(); // re-fix for proper with real quantity in DB
         	Map<String, Integer> items = cart.getItems();
             if (items != null) {
                 for (ProductModel product : result) {
@@ -89,6 +126,17 @@ public class ProductUtil {
                 }
             }
         }
+		return result;
+	}
+	public Product syncEditedProductModelToProduct(ProductModel productModel) {
+		
+		int orderedQuantity = orderDetailService.getOrderedQuantityOf(productModel.getSku());            
+		int availableQuantity =  productModel.getQuantity() + orderedQuantity;
+		
+		Product result = new Product();
+		result = productModelToProduct(productModel);
+		result.setQuantity(availableQuantity);
+		
 		return result;
 	}
 }

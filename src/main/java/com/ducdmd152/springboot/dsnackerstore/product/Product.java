@@ -4,28 +4,37 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "product")
 public class Product {
 	@Id
 	@Column(name = "sku")
+	@NotNull(message="Sku is required.")
 	private String sku;
 	
 	@Column(name = "name")
+	@NotNull(message="Sku is required.")
 	private String name;
 	
 	@Column(name = "description")
 	private String description;
 	
 	@Column(name = "quantity")
+	@NotNull(message="Quantity is required.")
+    @Min(value=0, message="Quantity is requried not less than 0.")
 	private int quantity;
 	
 	@Column(name = "price")
+    @NotNull(message="Quantity is required.")
+    @Min(value=0, message="Price is requried not less than 0.")
 	private float price;
 	
 	@Column(name = "status")
-	private boolean status;
+    @NotNull(message="Please, select the status of the product.")
+	private boolean status = true;
 
 	public Product() {
 	}

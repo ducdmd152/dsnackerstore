@@ -62,8 +62,8 @@ public class CartController {
 				if (items != null) {
 					// 4. System setup data to show the items in cart
 					/// 4.1 get informations
-					cart.refresh(); /// to fix problems like changed of quantity in database
-					List<ProductModel> productsInCart = cart.getAllProductsInCart();
+//					cart.refresh(); /// to fix problems like changed of quantity in database 
+					List<ProductModel> productsInCart = cart.getAllProductsInCart(); // already call refresh()
 					// 4.2 set data to send for view
 					model.addAttribute("PRODUCTS_IN_CART", productsInCart);
 				}

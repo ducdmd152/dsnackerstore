@@ -38,6 +38,7 @@ public class CartModel {
 
 	/// khong co set vi khong up xot hang loat, them tung item
     public Map<String, Integer> getItems() {
+    	this.refresh();
         return items;
     }
 
@@ -65,6 +66,27 @@ public class CartModel {
         // update items
         this.items.put(sku, quantity); /// put existed key?
     }
+    
+    public void updateItemInCart(String sku, int quantity) {
+        if (sku == null) {
+            return;
+        }
+
+        if (sku.trim().isEmpty()) {
+            return;
+        }
+
+        if (quantity == 0) {
+            return;
+        }
+
+        if (this.items == null) {
+            this.items = new HashMap<>();
+        } // items have not existed
+        
+        // update items
+        this.items.put(sku, quantity); /// put existed key?
+    }
 
     public void removeItemFromCart(String sku) {
         if (sku == null) {
@@ -86,14 +108,20 @@ public class CartModel {
         }
     }
 
-    public void refresh() { // sync the data in web-tier with persistence-tier
+    private void refresh() { // sync the data in web-tier with persistence-tier
         if (this.items == null) {
             return;
         }
+        List<String> keys =  new ArrayList<>(this.items.keySet());
         
-        for (String sku : this.items.keySet()) {
+        for (String sku : keys) {
             
             ProductModel productModel = productUtil.getProductSyncOrderedQuantity(sku);
+            
+            if(productModel.isStatus()==false) {
+            	this.removeItemFromCart(sku);
+            	continue;
+            }
             
             int availableQuantity = productModel.getQuantity();
             int quantityInCart = this.items.get(sku);          
@@ -103,12 +131,13 @@ public class CartModel {
             if (updatedQuantityInCart == 0) { // remove
                 this.removeItemFromCart(sku);
             } else { // update
-                this.items.put(sku, updatedQuantityInCart);
+                this.updateItemInCart(sku, updatedQuantityInCart);
             }
         }
     }
 
     public List<ProductModel> getSelectedProductsInCart(String[] selectedItems) {
+    	this.refresh();
         if(selectedItems==null) {
             return null;
         }
@@ -146,11 +175,11 @@ public class CartModel {
         return result;
     }
     
-    public List<ProductModel> getAllProductsInCart() {        
+    public List<ProductModel> getAllProductsInCart() {
+    	this.refresh();
         if(this.items==null) {
             return null;
         }
-        
         List<ProductModel> result = new ArrayList<>();
         
         for (String sku : this.items.keySet()) {
