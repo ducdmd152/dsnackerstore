@@ -55,5 +55,10 @@ public class ProductServiceJpaRepositoryImpl
 		return result.isPresent();
 	}
 
+	@Override
+	public void deleteProduct(String id) {
+		productJpaRepository.deleteById(id);
+	}
+
 
 }

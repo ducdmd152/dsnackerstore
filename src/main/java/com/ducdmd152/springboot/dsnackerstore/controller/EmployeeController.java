@@ -162,4 +162,15 @@ public class EmployeeController {
 		
 		return "redirect:/employee/showEditProduct?id=" + product.getSku();
 	}
+	
+//	@PostMapping("/deleteProduct")
+//	public String editProduct(
+//			Model model,
+//			@RequestParam String id
+//			) {
+//		
+//		productService.deleteProduct(id);
+//		
+//		return "redirect:/employee/showProducts";
+//	}
 }
