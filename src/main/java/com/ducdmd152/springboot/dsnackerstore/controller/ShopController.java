@@ -37,6 +37,7 @@ public class ShopController {
 		
 		// 3. turn to view
 		model.addAttribute("PRODUCTS", products);
-		return "raw/shop/list-products";
+//		return "raw/shop/list-products";
+		return "official/shop/shop-list";
 	}
 }
