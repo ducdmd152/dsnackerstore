@@ -12,6 +12,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script type="application/x-javascript">
 	
 	
+	
+	
+	
+	
+	
+	
+	
 		addEventListener("load", function () {
 			setTimeout(hideURLbar, 0);
 		}, false);
@@ -20,6 +27,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			window.scrollTo(0, 1);
 		}
 	
+
+
+
+
+
+
+
 
 </script>
 
@@ -159,407 +173,200 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 	<div class="container-fluid" style="padding: 3rem">
 		<!-- top Products -->
-		<div class="ads-grid_shop fz-16"></div>
-		<div class="shop_inner_inf">
-			<!-- tittle heading -->
+		<div class="ads-grid_shop fz-16">
+			<div class="shop_inner_inf">
+				<!-- //tittle heading -->
+				<!-- product left -->
+				<div class="side-bar col-md-3 float-left">
+					<div class="search-hotel">
+						<h3 class="agileits-sear-head">Search Here..</h3>
+						<form action="#" method="post">
+							<input type="search" placeholder="Product name..." name="search"
+								required=""> <input type="submit" value=" ">
+						</form>
+					</div>
+					<!-- price range -->
+					<div class="range">
+						<h3 class="agileits-sear-head">Price range</h3>
+						<ul class="dropdown-menu6">
+							<li>
 
-			<!-- //tittle heading -->
-			<!-- product left -->
-			<div class="side-bar col-md-3 float-left">
-				<div class="search-hotel">
-					<h3 class="agileits-sear-head">Search Here..</h3>
-					<form action="#" method="post">
-						<input type="search" placeholder="Product name..." name="search"
-							required=""> <input type="submit" value=" ">
-					</form>
-				</div>
-				<!-- price range -->
-				<div class="range">
-					<h3 class="agileits-sear-head">Price range</h3>
-					<ul class="dropdown-menu6">
-						<li>
+								<div id="slider-range"></div> <input type="text" id="amount"
+								style="border: 0; color: #ffffff; font-weight: normal;" />
+							</li>
+						</ul>
+					</div>
+					<!-- //price range -->
+					<!--preference -->
+					<div class="left-side">
+						<h3 class="agileits-sear-head">Brands</h3>
+						<ul>
+							<li><input type="checkbox" class="checked"> <span
+								class="span">Adidas</span></li>
+							<li><input type="checkbox" class="checked"> <span
+								class="span">Nike</span></li>
+						</ul>
+					</div>
 
-							<div id="slider-range"></div> <input type="text" id="amount"
-							style="border: 0; color: #ffffff; font-weight: normal;" />
-						</li>
-					</ul>
-				</div>
-				<!-- //price range -->
-				<!--preference -->
-				<div class="left-side">
-					<h3 class="agileits-sear-head">Brands</h3>
-					<ul>
-						<li><input type="checkbox" class="checked"> <span
-							class="span">Adidas</span></li>
-						<li><input type="checkbox" class="checked"> <span
-							class="span">Nike</span></li>
-					</ul>
-				</div>
+					<!-- color -->
+					<div class="left-side">
+						<h3 class="agileits-sear-head">Colors</h3>
+						<ul>
+							<li><input type="checkbox" class="checked"> <span
+								class="span">Black</span></li>
+							<li><input type="checkbox" class="checked"> <span
+								class="span">White</span></li>
+							<li><input type="checkbox" class="checked"> <span
+								class="span">Others</span></li>
+						</ul>
+					</div>
 
-				<!-- color -->
-				<div class="left-side">
-					<h3 class="agileits-sear-head">Colors</h3>
-					<ul>
-						<li><input type="checkbox" class="checked"> <span
-							class="span">Black</span></li>
-						<li><input type="checkbox" class="checked"> <span
-							class="span">White</span></li>
-						<li><input type="checkbox" class="checked"> <span
-							class="span">Others</span></li>
-					</ul>
 				</div>
+				<!-- //product left -->
+				<!-- product right -->
+				<div class="left-ads-display col-md-9 float-left "
+					style="padding: 0 1rem">
+					<div class="wrapper_top_shop" style="padding: 3rem">
+						<div class="col-md-12 d-flex justify-content-center">
 
-			</div>
-			<!-- //product left -->
-			<!-- product right -->
-			<div class="left-ads-display col-md-9 float-left " style="padding: 0 1rem">
-				<div class="wrapper_top_shop" style="padding: 3rem">
-					<!-- product-sec1 -->
-					<div class="product-sec1">
-						<div class="col-md-4 product-men float-left">
-							<div class="product-shoe-info shoe">
-								<div class="men-pro-item">
-									<div class="men-thumb-item">
-										<img th:src="@{/assets/images/s2.jpg}" alt="">
-										<div class="men-cart-pro">
-											<div class="inner-men-cart-pro">
-												<a th:href="@{/assets/single.html}"
-													class="link-product-add-cart">View more</a>
-											</div>
+							<nav aria-label="Page navigation example">
+								<ul class="pagination">
+									<li class="page-item"><a class="page-link" href="#">Prev</a></li>
+									<li class="page-item"><a class="page-link" href="#">1</a></li>
+									<li class="page-item"><a class="page-link" href="#">2</a></li>
+									<li class="page-item"><a class="page-link" href="#">3</a></li>
+									<li class="page-item"><a class="page-link" href="#">Next</a></li>
+								</ul>
+							</nav>
+						</div>
+
+						<!-- product-sec1 -->
+						<div class="product-sec1">
+							<div class="col-md-4 product-men float-left"
+								th:each="product : ${PRODUCTS}">
+								<div class="product-shoe-info shoe">
+									<div class="men-pro-item">
+										<div class="men-thumb-item"
+											onclick="location.href='somewhere'">
+											<img th:src="@{/assets/images/s2.jpg}" alt="View more">
+											<span class="product-new-top">New</span>
 										</div>
-										<span class="product-new-top">New</span>
-									</div>
-									<div class="item-info-product">
-										<h4>
-											<a th:href="@{/assets/single.html}">Chikku Loafers </a>
-										</h4>
-										<div class="info-product-price">
-											<div class="grid_meta">
-												<div class="product_price">
-													<div class="grid-price ">
-														<span class="money ">$405.00</span>
+										<div class="item-info-product">
+											<h4>
+												<a th:href="@{/shop/details(id=${product.sku})}"
+													th:text="${product.name}" class="item-info-product-title"></a>
+											</h4>
+											<div class="info-product-price">
+												<div class="grid_meta">
+													<div class="product_price">
+														<div class="grid-price ">
+															<span class="money " th:text="${product.price}"></span>
+														</div>
 													</div>
+													<ul class="stars">
+														<li><a th:href="@{/assets/#}"><i
+																class="fa fa-star" aria-hidden="true"></i></a></li>
+														<li><a th:href="@{/assets/#}"><i
+																class="fa fa-star" aria-hidden="true"></i></a></li>
+														<li><a th:href="@{/assets/#}"><i
+																class="fa fa-star" aria-hidden="true"></i></a></li>
+														<li><a th:href="@{/assets/#}"><i
+																class="fa fa-star" aria-hidden="true"></i></a></li>
+														<li><a th:href="@{/assets/#}"><i
+																class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
+													</ul>
 												</div>
-												<ul class="stars">
-													<li><a th:href="@{/assets/#}"><i
-															class="fa fa-star" aria-hidden="true"></i></a></li>
-													<li><a th:href="@{/assets/#}"><i
-															class="fa fa-star" aria-hidden="true"></i></a></li>
-													<li><a th:href="@{/assets/#}"><i
-															class="fa fa-star" aria-hidden="true"></i></a></li>
-													<li><a th:href="@{/assets/#}"><i
-															class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
-													<li><a th:href="@{/assets/#}"><i
-															class="fa fa-star-o" aria-hidden="true"></i></a></li>
-												</ul>
-											</div>
-											<div class="shoe single-item hvr-outline-out">
-												<form action="#" method="post">
-													<input type="hidden" name="cmd" value="_cart"> <input
-														type="hidden" name="add" value="1"> <input
-														type="hidden" name="shoe_item" value="Chikku Loafers">
-													<input type="hidden" name="amount" value="405.00">
-													<button type="submit" class="shoe-cart pshoe-cart">
-														<i class="fa fa-cart-plus" aria-hidden="true"></i>
-													</button>
+												<div class="shoe single-item hvr-outline-out">
+													<form action="#" th:action="@{/cart/addToCart}"
+														method="POST">
+														<input type="hidden" th:name="productId"
+															th:value="${product.sku}">
 
-													<a th:href="@{/assets/#}" data-toggle="modal"
-														data-target="#myModal1"></a>
-												</form>
-
+														<button type="submit" class="shoe-cart pshoe-cart">
+															<i class="fa fa-cart-plus" aria-hidden="true"></i>
+														</button>
+													</form>
+												</div>
 											</div>
+											<div class="clearfix"></div>
 										</div>
-										<div class="clearfix"></div>
 									</div>
 								</div>
+
+
+							</div>
+							<div class="clearfix"></div>
+
+						</div>
+						<div class="clearfix"></div>
+
+						<!-- banners -->
+						<div class="d-flex pt-5">
+							<div class="col-md-6 shop_left">
+								<img th:src="@{/assets/images/banner3.jpg}" alt="">
+								<h6>10% off</h6>
+							</div>
+							<div class="col-md-6 shop_right">
+								<img th:src="@{/assets/images/banner2.jpg}" alt="">
+								<h6>20% off</h6>
 							</div>
 						</div>
 
-						<div class="col-md-4 product-men float-left">
-							<div class="product-shoe-info shoe">
-								<div class="men-pro-item">
-									<div class="men-thumb-item">
-										<img th:src="@{/assets/images/s2.jpg}" alt="">
-										<div class="men-cart-pro">
-											<div class="inner-men-cart-pro">
-												<a th:href="@{/assets/single.html}"
-													class="link-product-add-cart">View more</a>
-											</div>
-										</div>
-										<span class="product-new-top">New</span>
-									</div>
-									<div class="item-info-product">
-										<h4>
-											<a th:href="@{/assets/single.html}">Chikku Loafers </a>
-										</h4>
-										<div class="info-product-price">
-											<div class="grid_meta">
-												<div class="product_price">
-													<div class="grid-price ">
-														<span class="money ">$405.00</span>
-													</div>
-												</div>
-												<ul class="stars">
-													<li><a th:href="@{/assets/#}"><i
-															class="fa fa-star" aria-hidden="true"></i></a></li>
-													<li><a th:href="@{/assets/#}"><i
-															class="fa fa-star" aria-hidden="true"></i></a></li>
-													<li><a th:href="@{/assets/#}"><i
-															class="fa fa-star" aria-hidden="true"></i></a></li>
-													<li><a th:href="@{/assets/#}"><i
-															class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
-													<li><a th:href="@{/assets/#}"><i
-															class="fa fa-star-o" aria-hidden="true"></i></a></li>
-												</ul>
-											</div>
-											<div class="shoe single-item hvr-outline-out">
-												<form action="#" method="post">
-													<input type="hidden" name="cmd" value="_cart"> <input
-														type="hidden" name="add" value="1"> <input
-														type="hidden" name="shoe_item" value="Chikku Loafers">
-													<input type="hidden" name="amount" value="405.00">
-													<button type="submit" class="shoe-cart pshoe-cart">
-														<i class="fa fa-cart-plus" aria-hidden="true"></i>
-													</button>
-
-													<a th:href="@{/assets/#}" data-toggle="modal"
-														data-target="#myModal1"></a>
-												</form>
-
-											</div>
-										</div>
-										<div class="clearfix"></div>
-									</div>
-								</div>
-							</div>
-						</div>
-						
-
+						<div class="clearfix"></div>
 					</div>
-					<div class="clearfix"></div>
-
-					<!-- banners -->
-					<div class="d-flex pt-5">
-						<div class="col-md-6 shop_left">
-							<img th:src="@{/assets/images/banner3.jpg}" alt="">
-							<h6>10% off</h6>
-						</div>
-						<div class="col-md-6 shop_right">
-							<img th:src="@{/assets/images/banner2.jpg}" alt="">
-							<h6>20% off</h6>
-						</div>
-					</div>
-
-					<div class="clearfix"></div>
 				</div>
+				<div class="clearfix"></div>
 			</div>
-			<div class="clearfix"></div>
 		</div>
 	</div>
 	<!-- //top products -->
-	<!-- <div class="mid_slider_w3lsagile">
-		<div class="col-md-3 mid_slider_text">
-			<h5>Some More Shoes</h5>
-		</div>
-		<div class="col-md-9 mid_slider_info">
-			<div id="myCarousel" class="carousel slide" data-ride="carousel">
-				Indicators
-				<ol class="carousel-indicators">
-					<li data-target="#myCarousel" data-slide-to="0" class=""></li>
-					<li data-target="#myCarousel" data-slide-to="1" class="active"></li>
-					<li data-target="#myCarousel" data-slide-to="2" class=""></li>
-					<li data-target="#myCarousel" data-slide-to="3" class=""></li>
-				</ol>
-				<div class="carousel-inner" role="listbox">
-					<div class="item">
-						<div class="row">
-							<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-								<div class="thumbnail"><img src="images/g1.jpg" alt="Image" style="max-width:100%;"></div>
-							</div>
-							<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-								<div class="thumbnail"><img src="images/g2.jpg" alt="Image" style="max-width:100%;"></div>
-							</div>
-							<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-								<div class="thumbnail"><img src="images/g3.jpg" alt="Image" style="max-width:100%;"></div>
-							</div>
-							<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-								<div class="thumbnail"><img src="images/g4.jpg" alt="Image" style="max-width:100%;"></div>
-							</div>
-						</div>
-					</div>
-					<div class="item active">
-						<div class="row">
-							<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-								<div class="thumbnail"><img src="images/g5.jpg" alt="Image" style="max-width:100%;"></div>
-							</div>
-							<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-								<div class="thumbnail"><img src="images/g6.jpg" alt="Image" style="max-width:100%;"></div>
-							</div>
-							<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-								<div class="thumbnail"><img src="images/g2.jpg" alt="Image" style="max-width:100%;"></div>
-							</div>
-							<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-								<div class="thumbnail"><img src="images/g1.jpg" alt="Image" style="max-width:100%;"></div>
-							</div>
-						</div>
-					</div>
-					<div class="item">
-						<div class="row">
-							<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-								<div class="thumbnail"><img src="images/g1.jpg" alt="Image" style="max-width:100%;"></div>
-							</div>
-							<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-								<div class="thumbnail"><img src="images/g2.jpg" alt="Image" style="max-width:100%;"></div>
-							</div>
-							<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-								<div class="thumbnail"><img src="images/g3.jpg" alt="Image" style="max-width:100%;"></div>
-							</div>
-							<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-								<div class="thumbnail"><img src="images/g4.jpg" alt="Image" style="max-width:100%;"></div>
-							</div>
-						</div>
-					</div>
-					<div class="item">
-						<div class="row">
-							<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-								<div class="thumbnail"><img src="images/g1.jpg" alt="Image" style="max-width:100%;"></div>
-							</div>
-							<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-								<div class="thumbnail"><img src="images/g2.jpg" alt="Image" style="max-width:100%;"></div>
-							</div>
-							<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-								<div class="thumbnail"><img src="images/g3.jpg" alt="Image" style="max-width:100%;"></div>
-							</div>
-							<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-								<div class="thumbnail"><img src="images/g4.jpg" alt="Image" style="max-width:100%;"></div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<a class="left carousel-control" th:href="@{/assets/#myCarousel}" role="button" data-slide="prev">
-			<span class="fa fa-chevron-left" aria-hidden="true"></span>
-			<span class="sr-only">Previous</span>
-		</a>
-				<a class="right carousel-control" th:href="@{/assets/#myCarousel}" role="button" data-slide="next">
-			<span class="fa fa-chevron-right" aria-hidden="true"></span>
-			<span class="sr-only">Next</span>
-		</a>
-				The Modal
-
-			</div>
-		</div>
-
-		<div class="clearfix"> </div>
-	</div> -->
-	<!-- /newsletter-->
-	<!-- 	<div class="newsletter_w3layouts_agile"> -->
-	<!-- //newsletter-->
-	<!-- footer -->
-	<!-- 	<div class="footer_agileinfo_w3">
-		<div class="footer_inner_info_w3ls_agileits">
-			<div class="col-md-3 footer-left">
-				<h2><a th:href="@{/assets/index.html"><span>D</span>owny Shoes </a></h2>
-				<p>Lorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora.</p>
-				<ul class="social-nav model-3d-0 footer-social social two">
-					<li>
-						<a th:href="@{/assets/#" class="facebook">
-							<div class="front"><i class="fa fa-facebook" aria-hidden="true"></i></div>
-							<div class="back"><i class="fa fa-facebook" aria-hidden="true"></i></div>
-						</a>
-					</li>
-					<li>
-						<a th:href="@{/assets/#" class="twitter">
-							<div class="front"><i class="fa fa-twitter" aria-hidden="true"></i></div>
-							<div class="back"><i class="fa fa-twitter" aria-hidden="true"></i></div>
-						</a>
-					</li>
-					<li>
-						<a th:href="@{/assets/#" class="instagram">
-							<div class="front"><i class="fa fa-instagram" aria-hidden="true"></i></div>
-							<div class="back"><i class="fa fa-instagram" aria-hidden="true"></i></div>
-						</a>
-					</li>
-					<li>
-						<a th:href="@{/assets/#" class="pinterest">
-							<div class="front"><i class="fa fa-linkedin" aria-hidden="true"></i></div>
-							<div class="back"><i class="fa fa-linkedin" aria-hidden="true"></i></div>
-						</a>
-					</li>
-				</ul>
-			</div>
-			<div class="col-md-9 footer-right">
-				<div class="sign-grds">
-					<div class="col-md-4 sign-gd">
-						<h4>Our <span>Information</span> </h4>
-						<ul>
-							<li><a th:href="@{/assets/index.html">Home</a></li>
-							<li><a th:href="@{/assets/about.html">About</a></li>
-							<li><a th:href="@{/assets/404.html">Services</a></li>
-							<li><a th:href="@{/assets/404.html">Short Codes</a></li>
-							<li><a th:href="@{/assets/contact.html">Contact</a></li>
+	<div id="staplesbmincart">
+		<form>
+			<button type="button" class="sbmincart-closer">×</button>
+			<ul>
+				<li class="sbmincart-item"
+					th:each="productInCart : ${PRODUCTS_IN_CART}">
+					<div class="sbmincart-details-name">
+						<a class="sbmincart-name" th:text="${productInCart.name}" href="#">Bella
+							Toes</a>
+						<ul class="sbmincart-attributes">
 						</ul>
 					</div>
-
-					<div class="col-md-5 sign-gd-two">
-						<h4>Store <span>Information</span></h4>
-						<div class="address">
-							<div class="address-grid">
-								<div class="address-left">
-									<i class="fa fa-phone" aria-hidden="true"></i>
-								</div>
-								<div class="address-right">
-									<h6>Phone Number</h6>
-									<p>+1 234 567 8901</p>
-								</div>
-								<div class="clearfix"> </div>
-							</div>
-							<div class="address-grid">
-								<div class="address-left">
-									<i class="fa fa-envelope" aria-hidden="true"></i>
-								</div>
-								<div class="address-right">
-									<h6>Email Address</h6>
-									<p>Email :<a th:href="@{/assets/mailto:example@email.com"> mail@example.com</a></p>
-								</div>
-								<div class="clearfix"> </div>
-							</div>
-							<div class="address-grid">
-								<div class="address-left">
-									<i class="fa fa-map-marker" aria-hidden="true"></i>
-								</div>
-								<div class="address-right">
-									<h6>Location</h6>
-									<p>Broome St, NY 10002,California, USA.
-
-									</p>
-								</div>
-								<div class="clearfix"> </div>
-							</div>
-						</div>
+					<div class="sbmincart-details-quantity">
+						<input disabled class="sbmincart-quantity" data-sbmincart-idx="0"
+							th:name="quantity_1" type="text" pattern="[0-9]*"
+							th:value="${productInCart.quantity}" autocomplete="off">
 					</div>
-					<div class="col-md-3 sign-gd flickr-post">
-						<h4>Flickr <span>Posts</span></h4>
-						<ul>
-							<li><a th:href="@{/assets/single.html"><img src="images/t1.jpg" alt=" " class="img-responsive" /></a></li>
-							<li><a th:href="@{/assets/single.html"><img src="images/t2.jpg" alt=" " class="img-responsive" /></a></li>
-							<li><a th:href="@{/assets/single.html"><img src="images/t3.jpg" alt=" " class="img-responsive" /></a></li>
-							<li><a th:href="@{/assets/single.html"><img src="images/t4.jpg" alt=" " class="img-responsive" /></a></li>
-							<li><a th:href="@{/assets/single.html"><img src="images/t1.jpg" alt=" " class="img-responsive" /></a></li>
-							<li><a th:href="@{/assets/single.html"><img src="images/t2.jpg" alt=" " class="img-responsive" /></a></li>
-							<li><a th:href="@{/assets/single.html"><img src="images/t3.jpg" alt=" " class="img-responsive" /></a></li>
-							<li><a th:href="@{/assets/single.html"><img src="images/t2.jpg" alt=" " class="img-responsive" /></a></li>
-							<li><a th:href="@{/assets/single.html"><img src="images/t4.jpg" alt=" " class="img-responsive" /></a></li>
-						</ul>
+					<div class="sbmincart-details-remove">
+						<a th:href="@{/cart/removeOutCart(productId=${productInCart.sku}, requestFromUrl=${#httpServletRequest.requestURI})}"
+								onclick="if (!confirm('Are you sure you want to delete this product?')) return false"
+								
+								class="sbmincart-remove d-inline" style="padding: 1px 4px">
+								×
+						</a>
 					</div>
-					<div class="clearfix"></div>
-				</div>
+					<div class="sbmincart-details-price">
+						<span class="sbmincart-price" th:text="${productInCart.total}">$675.00</span>
+					</div> <input type="hidden" name="shoe_item_1" value="Bella Toes">
+					<input type="hidden" name="amount_1" value="675"> <input
+					type="hidden" name="shipping_1" value="undefined"> <input
+					type="hidden" name="shipping2_1" value="undefined">
+				</li>
+			</ul>
+			<div class="sbmincart-footer" style="padding-bottom: 12px;">
+<!-- 				<div class="sbmincart-subtotal">Subtotal: $1455.00 USD</div> -->
+<!-- 				<button class="sbmincart-submit" type="submit"
+					data-sbmincart-alt="undefined">Check Out</button> -->
+					
+					<a th:href="@{/cart/viewCart}"
+						class="btn btn-primary btn-sm">View cart</a>
 			</div>
-			<div class="clearfix"></div>
-
-			<p class="copy-right-w3ls-agileits">&copy 2018 Downy Shoes. All rights reserved | Design by <a th:href="@{/assets/http://w3layouts.com/">w3layouts</a></p>
-		</div>
+			<input type="hidden" name="cmd" value="_cart"> <input
+				type="hidden" name="upload" value="1"> <input type="hidden"
+				name="bn" value="sbmincart_AddToCart_WPS_US">
+		</form>
 	</div>
-	</div> -->
+	<!-- footer -->
 	<!-- //footer -->
 	<a th:href="@{/assets/#home}" id="toTop" class="scroll"
 		style="display: block;"> <span id="toTopHover" style="opacity: 1;">
@@ -569,7 +376,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		th:src="@{/assets/js/jquery-2.1.4.min.js}"></script>
 	<!-- //js -->
 	<!-- cart-js -->
-	<script th:src="@{/assets/js/minicart.js}"></script>
+	<!-- 	<script th:src="@{/assets/js/minicart.js}"></script> -->
 	<script>
 		shoe.render();
 

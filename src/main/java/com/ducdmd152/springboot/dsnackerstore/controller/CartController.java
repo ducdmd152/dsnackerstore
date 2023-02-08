@@ -29,7 +29,7 @@ public class CartController {
 	@Autowired
 	private OrderUtil orderUtil;
 
-	@GetMapping("/addToCart")
+	@PostMapping("/addToCart")
 	public String addToCart(HttpServletRequest request, Model model, @RequestParam String productId) {
 		// 1. Cust goes to cart placement
 		HttpSession session = request.getSession(true); /// default = true
@@ -44,7 +44,7 @@ public class CartController {
 		// 4. Cust drops item down
 		cart.addItemToCart(productId, 1);
 		session.setAttribute("CART", cart);
-
+		
 		return "redirect:/shop/list";
 	}
 
@@ -73,7 +73,8 @@ public class CartController {
 	}
 
 	@GetMapping("/removeOutCart")
-	public String removeOutCart(HttpServletRequest request, Model model, @RequestParam String productId) {
+	public String removeOutCart(HttpServletRequest request, Model model, @RequestParam String productId,
+			@RequestParam(required = false) String requestFromUrl) {
 		// 1. Cust goes to his/her cart placement
 		HttpSession session = request.getSession(false); // false for check scope timeout because user's problem
 		if (session != null) {
@@ -84,7 +85,11 @@ public class CartController {
 			} // end cart has existed
 		} // end session has existed
 
-		return "redirect:/cart/viewCart";
+		if(requestFromUrl == null) {
+			requestFromUrl = "/cart/viewCart";
+		}
+//		System.out.println(requestFromUrl);
+		return "redirect:" + requestFromUrl;
 	}
 
 	@PostMapping("/performSelectedItems")
