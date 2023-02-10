@@ -34,9 +34,15 @@ public class ShopController {
 		
 		// 2. Get compatible info of products for the user
 		List<ProductModel> products = productUtil.getProductsSyncOrderedQuantitySyncCart(cart);
-		
+		List<ProductModel> productsInCart = null;
+		if(cart!=null) {
+			 productsInCart = cart.getAllProductsInCart();
+		}
 		// 3. turn to view
 		model.addAttribute("PRODUCTS", products);
-		return "raw/shop/list-products";
+		model.addAttribute("PRODUCTS_IN_CART",  productsInCart);
+		
+//		return "raw/shop/list-products";
+		return "official/shop/shop-list";
 	}
 }
