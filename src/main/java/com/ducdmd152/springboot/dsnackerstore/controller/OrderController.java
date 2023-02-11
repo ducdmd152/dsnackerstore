@@ -2,6 +2,7 @@ package com.ducdmd152.springboot.dsnackerstore.controller;
 
 import java.sql.Timestamp;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -107,13 +109,19 @@ public class OrderController {
 			preparedOrders.remove(preparedOrderKey);
 			
 			// send to view
-			model.addAttribute("ORDER", order);
-			return "raw/order/orderSuccess";
+//			model.addAttribute("ORDER", order);
+			return "redirect:/order/showOrder?id=" + order.getId();
 		}
 		else {
 			return "raw/order/orderFail";
 		}
 	}
 	
-	
+	@GetMapping("/showOrder")
+	public String showOrder(Model model, @RequestParam int id) {
+		Order order = orderService.getOrder(id);
+		
+		model.addAttribute("ORDER", order);
+		return "raw/order/orderSuccess";
+	}
 }
