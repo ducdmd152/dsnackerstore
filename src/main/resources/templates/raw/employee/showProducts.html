@@ -112,7 +112,7 @@
 		<script th:src="@{/assets/js/custom.js}"></script>
 		<!-- End Script -->
 	</header>
-
+	
 	<div id="snippetContent">
 		<link rel="stylesheet"
 			href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/css/bootstrap.min.css">
@@ -123,6 +123,7 @@
 				<div class="card">
 					<div class="card-header d-flex justify-content-between">
 						<h2>Products in store</h2>
+						<a th:href="@{/employee/showCreateProduct}" class="btn btn-primary btn">Create new product</a>
 					</div>
 					<div class="card-body">
 						<div class="table-responsive">
@@ -171,7 +172,7 @@
 				</div>
 			</form>
 		</div>
-
+	<link rel="stylesheet" th:href="@{/myassets/css/home.css}">
 </body>
 
 </html>
