@@ -5,7 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ScopeUtil {
+public class SessionUtil {
 	public<T> T getAttributeFromSession(HttpSession session, String key) {
 		if(session == null) {
 			return null;

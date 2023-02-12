@@ -8,4 +8,8 @@ public interface OrderJpaRepository extends JpaRepository<Order, Integer> {
 
 	List<Order> findAllByStatus(String status);
 
+	List<Order> findAllByUsername(String username);
+
+	List<Order> findAllByUsernameAndStatus(String username, String status);
+
 }

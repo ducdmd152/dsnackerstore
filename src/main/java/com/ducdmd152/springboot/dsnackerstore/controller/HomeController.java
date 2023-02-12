@@ -22,6 +22,9 @@ public class HomeController {
 		if(request.isUserInRole("ROLE_CUSTOMER")) {
 			return "customer";
 		}
+		else if(request.isUserInRole("ROLE_EMPLOYEE")) {
+			return "home";
+		}
 		
 		return "guest";
 	}

@@ -107,7 +107,7 @@
 						<input type="text" class="form-control" id="inputModalSearch"
 							name="q" placeholder="Search ...">
 						<button type="submit"
-							class="input-group-text bg-success text-light">
+							disabled class="input-group-text bg-success text-light">
 							<i class="fa fa-fw fa-search text-white"></i>
 						</button>
 					</div>
@@ -124,6 +124,8 @@
 		<!-- End Script -->
 	</header>
 	
+	<a th:href="@{/cart/viewCart}" class="btn btn-outline-primary btn mt-2 ml-2">Back
+			to cart</a>
 	<div class="container">
 		<!-- FORM FOR DELIVERY -->
 		

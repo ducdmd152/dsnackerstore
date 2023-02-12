@@ -13,5 +13,10 @@ public interface OrderService {
 	public List<Order> getOrdersWithStatus(String status);
 
 	public Order getOrder(int id);
+
+	public List<Order> getOrdersByUser(
+			String username);
+	public List<Order> getOrdersByUserWithStatus(
+			String username, String status);
 	
 }
