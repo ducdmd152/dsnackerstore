@@ -8,86 +8,201 @@
 	rel="stylesheet"
 	integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
 	crossorigin="anonymous">
+<link th:href="@{/myassets/css/employee/showEditProduct.css}"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </head>
 <body>
-	<div class="container">
-		<section class="h-100">
-			<div class="container h-100">
-				<div class="row justify-content-sm-center h-100">
-					<div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
-						<div class="text-center my-5">
-							<img
-								src="https://getbootstrap.com/docs/5.0/assets/brand/bootstrap-logo.svg"
-								alt="logo" width="100">
+	<header>
+		<link rel="stylesheet" th:href="@{/assets/css/fontawesome.min.css}">
+
+		<nav class="navbar navbar-expand-lg navbar-light shadow">
+
+			<div
+				class="container d-flex justify-content-between align-items-center">
+
+				<a
+					class="navbar-brand text-success logo h1 align-self-center ds-logo-text"
+					th:href="@{/}"> DSnacker </a>
+
+				<button class="navbar-toggler border-0" type="button"
+					data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav"
+					aria-controls="navbarSupportedContent" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div
+					class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between"
+					id="templatemo_main_nav">
+					<div class="flex-fill">
+						<ul
+							class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
+							<li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+							<li class="nav-item"><a th:href="@{/employee/showProducts}"
+								class="nav-link">Product Management</a></li>
+							<li class="nav-item"><a th:href="@{/employee/showOrders}"
+								class="nav-link">Order Management</a></li>
+						</ul>
+					</div>
+					<div class="navbar align-self-center d-flex">
+						<div
+							class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
+							<div class="input-group">
+								<input type="text" class="form-control" id="inputMobileSearch"
+									placeholder="Search ...">
+								<div class="input-group-text">
+									<i class="fa fa-fw fa-search"></i>
+								</div>
+							</div>
 						</div>
+
+						<a class="nav-icon d-none d-lg-inline" href="#"
+							data-bs-toggle="modal" data-bs-target="#templatemo_search"> <i
+							class="fa fa-fw fa-search text-dark mr-2"
+							style="font-size: 28px;"></i>
+						</a>
+						<!-- CART -->
+						<a sec:authorize="isAuthenticated()" style="margin-right: 28px"
+							href="#" class="nav-icon position-relative text-decoration-none">
+							<i class="fa fa-fw fa-user text-dark mr-3"
+							style="font-size: 28px; color: #47ade1 !important;"></i> <span
+							style="color: #47ade1 !important;"
+							th:text="${#authentication.getPrincipal().getUsername()}"
+							class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">
+						</span>
+						</a>
+						<form action="#" th:action="@{/logout}" method="POST"
+							sec:authorize="isAuthenticated()">
+							<button type="submit" class="btn btn-outline-info btn-sm">Logout</button>
+						</form>
+					</div>
+				</div>
+
+			</div>
+		</nav>
+		<!-- Close Header -->
+
+		<!-- Modal -->
+		<div class="modal fade bg-white" id="templatemo_search" tabindex="-1"
+			role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="w-100 pt-1 mb-5 text-right">
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<form action="" method="get"
+					class="modal-content modal-body border-0 p-0">
+					<div class="input-group mb-2">
+						<input type="text" class="form-control" id="inputModalSearch"
+							name="q" placeholder="Search ...">
+						<button type="submit"
+							class="input-group-text bg-success text-light">
+							<i class="fa fa-fw fa-search text-white"></i>
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		<link rel="stylesheet" th:href="@{/myassets/css/home.css}">
+		<!-- Start Script -->
+		<script th:src="@{/assets/js/jquery-1.11.0.min.js}"></script>
+		<script th:src="@{/assets/js/jquery-migrate-1.2.1.min.js}"></script>
+		<script th:src="@{/assets/js/bootstrap.bundle.min.js}"></script>
+		<script th:src="@{/assets/js/templatemo.js}"></script>
+		<script th:src="@{/assets/js/custom.js}"></script>
+		<!-- End Script -->
+	</header>
+	
+	<form th:action="@{/employee/editProduct}" th:object="${PRODUCT}"
+		method="POST" class="needs-validation" novalidate=""
+		autocomplete="off">
+		<section class="py-5 pt-1">
+			<div class="container px-4 px-lg-5 my-5">
+				<div class="row gx-4 gx-lg-5 align-items-center">
+					<div class="col-md-8">
 						<div class="card shadow-lg">
 							<div class="col-sm-12 justify-content-center">
 								<a href="/employee/showProducts"
-									class="btn btn-outline-info btn-sm">Show products</a>
+									class="btn btn-outline-info btn-sm">Back to products</a>
 							</div>
-							<div class="card-body p-5">
+							<div class="card-body p-5 pt-3">
 								<h1 class="fs-4 card-title fw-bold mb-4">Edit product</h1>
-								<form th:action="@{/employee/editProduct}"
-									th:object="${PRODUCT}" method="POST" class="needs-validation"
-									novalidate="" autocomplete="off">
 
 
-									<div class="mb-3">
-										<label class="mb-2 text-muted" for="email">Sku</label> <input
-											disabled type="text" th:field="*{sku}" class="form-control">
-										<small class="text-danger fst-italic"
-											th:if="${#fields.hasErrors('*{sku}')}" th:errors="*{sku}" />
-										<input type="hidden" th:field="*{sku}" class="form-control">
-										<small class="text-danger fst-italic"
-											th:if="${#fields.hasErrors('*{sku}')}" th:errors="*{sku}" />
 
-									</div>
+								<div class="mb-3">
+									<label class="mb-2 text-muted" for="email">SKU</label> <input
+										disabled type="text" th:field="*{sku}" class="form-control">
+									<small class="text-danger fst-italic"
+										th:if="${#fields.hasErrors('*{sku}')}" th:errors="*{sku}" />
+									<input type="hidden" th:field="*{sku}" class="form-control">
+									<small class="text-danger fst-italic"
+										th:if="${#fields.hasErrors('*{sku}')}" th:errors="*{sku}" />
 
-									<div class="mb-3">
-										<label class="mb-2 text-muted" for="email">name</label> <input
-											type="text" th:field="*{name}" class="form-control">
-										<small class="text-danger fst-italic"
-											th:if="${#fields.hasErrors('*{name}')}" th:errors="*{name}" />
-									</div>
+								</div>
 
-									<div class="mb-3">
-										<label class="mb-2 text-muted" for="email">description</label>
-										<input type="text" th:field="*{description}"
-											class="form-control"> <small
-											class="text-danger fst-italic"
-											th:if="${#fields.hasErrors('*{description}')}"
-											th:errors="*{description}" />
-									</div>
+								<div class="mb-3">
+									<label class="mb-2 text-muted" for="email">Name</label> <input
+										type="text" th:field="*{name}" class="form-control"> <small
+										class="text-danger fst-italic"
+										th:if="${#fields.hasErrors('*{name}')}" th:errors="*{name}" />
+								</div>
 
-									<div class="mb-3">
-										<label class="mb-2 text-muted" for="email">price</label> <input
-											type="text" th:field="*{price}" class="form-control">
-										<small class="text-danger fst-italic"
-											th:if="${#fields.hasErrors('*{price}')}" th:errors="*{price}" />
-									</div>
+								<div class="mb-3">
+									<label class="mb-2 text-muted" for="email">Description</label>
+									<input type="text" th:field="*{description}"
+										class="form-control"> <small
+										class="text-danger fst-italic"
+										th:if="${#fields.hasErrors('*{description}')}"
+										th:errors="*{description}" />
+								</div>
 
-									<div class="mb-3">
-										<label class="mb-2 text-muted" for="email">quantity</label> <input
-											type="text" th:field="*{quantity}" class="form-control">
-										<small class="text-danger fst-italic"
-											th:if="${#fields.hasErrors('*{quantity}')}"
-											th:errors="*{quantity}" />
-									</div>
+								<div class="mb-3">
+									<label class="mb-2 text-muted" for="email">Price</label> <input
+										type="text" th:field="*{price}" class="form-control">
+									<small class="text-danger fst-italic"
+										th:if="${#fields.hasErrors('*{price}')}" th:errors="*{price}" />
+								</div>
 
-									<div class="mb-3">
-										<label class="mb-2 text-muted" for="email">status</label> <input
-											type="text" th:field="*{status}" class="form-control">
-										<small class="text-danger fst-italic"
-											th:if="${#fields.hasErrors('*{status}')}"
-											th:errors="*{status}" />
-									</div>
+								<div class="mb-3">
+									<label class="mb-2 text-muted" for="email">Quantity</label> <input
+										type="text" th:field="*{quantity}" class="form-control">
+									<small class="text-danger fst-italic"
+										th:if="${#fields.hasErrors('*{quantity}')}"
+										th:errors="*{quantity}" />
+								</div>
 
-									<div class="align-items-center d-flex">
-										<button type="submit" class="btn btn-primary ms-auto">
-											Save</button>
-									</div>									
-								</form>
+								<div class="mb-3">
+									<label class="mb-2 text-muted" for="status">Status</label>
+									<br>
+									<input type="radio" id="status_true" th:name="status" value="true"
+										th:if="*{status}" checked
+									>
+									<input type="radio" id="status_true" th:name="status" value="true"
+										th:if="*{status} == false"
+									>
+									<label for="status_true">Available</label><br>
+									<input type="radio" id="status_false" th:name="status" value="false"
+										th:if="*{status} == false" checked
+										>
+									<input type="radio" id="status_false" th:name="status" value="false"
+										th:if="*{status}"
+										>
+									<label for="status_false">Non-available</label><br>
+									
+									<small class="text-danger fst-italic"
+										th:if="${#fields.hasErrors('*{status}')}"
+										th:errors="*{status}" />
+								</div>
+
+								<div class="align-items-center d-flex">
+									<button type="submit" class="btn btn-primary ms-auto">
+										Save</button>
+								</div>
+
 								<!-- <form action="#" th:action="@{/employee/deleteProduct}"
 										method="POST">
 										<input type="hidden" th:name="id" th:value="${PRODUCT.sku}">
@@ -96,15 +211,38 @@
 							</div>
 						</div>
 
-						<div class="text-center mt-5 text-muted">Copyright &copy;
-							2023 &mdash; DSnacker</div>
+					</div>
+					<div class="col-md-4">
+						<img class="card-img-top mb-5 mb-md-0" id="img_product" th:src="*{img}" alt="..." />
+						<div class="mb-3">
+									<label class="mb-2 text-muted" style="font-size: 1.4rem;" for="img">
+									IMAGE URL
+									</label> <input id="img_url"
+										type="text" th:field="*{img}" class="form-control">
+									<small class="text-danger fst-italic"
+										th:if="${#fields.hasErrors('*{img}')}"
+										th:errors="*{img}" />
+								</div>
+						<div class="align-items-center d-flex">
+									<button type="submit" class="btn btn-primary ms-auto">
+										Update</button>
+								</div>
 					</div>
 				</div>
-			</div>
 		</section>
+	</form>
 
-	</div>
+	<script>
 
-	<script src="js/login.js"></script>
+	const url = document.querySelector('#img_url');
+
+	url.addEventListener('change', updateIMG);
+	url.addEventListener('input', updateIMG);
+
+	function updateIMG(e) {
+		document.querySelector('#img_product').src = e.target.value;
+	}
+
+	</script>
 </body>
 </html>
