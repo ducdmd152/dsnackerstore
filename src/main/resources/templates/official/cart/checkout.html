@@ -7,7 +7,7 @@
 </head>
 
 <body>
-<header>
+	<header>
 		<link rel="stylesheet" th:href="@{/assets/css/fontawesome.min.css}">
 
 		<nav class="navbar navbar-expand-lg navbar-light shadow">
@@ -106,8 +106,8 @@
 					<div class="input-group mb-2">
 						<input type="text" class="form-control" id="inputModalSearch"
 							name="q" placeholder="Search ...">
-						<button type="submit"
-							disabled class="input-group-text bg-success text-light">
+						<button type="submit" disabled
+							class="input-group-text bg-success text-light">
 							<i class="fa fa-fw fa-search text-white"></i>
 						</button>
 					</div>
@@ -123,13 +123,13 @@
 		<script th:src="@{/assets/js/custom.js}"></script>
 		<!-- End Script -->
 	</header>
-	
-	<a th:href="@{/cart/viewCart}" class="btn btn-outline-primary btn mt-2 ml-2">Back
-			to cart</a>
+
+	<a th:href="@{/cart/viewCart}"
+		class="btn btn-outline-primary btn mt-2 ml-2">Back to cart</a>
 	<div class="container">
 		<!-- FORM FOR DELIVERY -->
-		
-		<div class="form-delivery">			
+
+		<div class="form-delivery">
 			<form th:action="@{/order/makeOrder}" th:object="${ORDER}"
 				method="POST" class="needs-validation">
 				<h3>Delivery Information</h3>
@@ -193,15 +193,14 @@
 									<tr th:each="orderDetail : ${ORDER.orderDetails}">
 										<td class="p-4">
 											<div class="media align-items-center">
-												<img
-													src="https://bootdey.com/img/Content/avatar/avatar1.png"
+												<img th:src="${orderDetail.product.img}"
 													class=" d-block ui-w-40 ui-bordered mr-4 object-fit-cover border rounded item-cart-avt"
 													alt="">
 												<div class="media-body">
 													<a href="#" class="d-block text-dark"
-														th:text="${orderDetail.product.name}"></a> <small> <span
-														class="text-muted" th:text="'SKU: ' + ${orderDetail.product.sku}"></span>
-														<!-- <span class="text-muted"> Color: ... </span> <span
+														th:text="${orderDetail.product.name}"></a> <small>
+														<span class="text-muted"
+														th:text="'SKU: ' + ${orderDetail.product.sku}"></span> <!-- <span class="text-muted"> Color: ... </span> <span
 													class="ui-product-color ui-product-color-sm align-text-bottom"
 													style="background: #e81e2c;"></span> &nbsp; <span
 													class="text-muted">Size: ... </span> -->
@@ -210,14 +209,20 @@
 											</div>
 										</td>
 										<td class="text-right font-weight-semibold align-middle p-4"
-											th:text="${orderDetail.price}">$57.55</td>
+											th:text="'$' + ${orderDetail.price}">$57.55</td>
 										<td class="align-middle p-4"><input disabled type="text"
 											class="form-control text-center"
 											th:value="${orderDetail.quantity}"></td>
 										<td class="text-right font-weight-semibold align-middle p-4"
-											th:text="${orderDetail.total}">$115.1</td>
+											th:text="'$' + ${orderDetail.total}">$115.1</td>
 									</tr>
 								</tbody>
+								<tfoot>
+									<tr class="text-center bg-dark text-white fs-5 text">
+										<td>Total</td>
+										<td th:text="'$' + ${ORDER.total}" colspan="3" ></td>
+									</tr>
+								</tfoot>
 							</table>
 						</div>
 					</div>

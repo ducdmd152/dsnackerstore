@@ -35,12 +35,14 @@ public class Product {
 	@Column(name = "status")
     @NotNull(message="Please, select the status of the product.")
 	private boolean status = true;
+	
+	@Column(name = "img")
+	private String img;
 
 	public Product() {
 	}
 
 	public Product(String sku, String name, String description, int quantity, float price, boolean status) {
-		super();
 		this.sku = sku;
 		this.name = name;
 		this.description = description;
@@ -95,6 +97,14 @@ public class Product {
 
 	public void setStatus(boolean status) {
 		this.status = status;
+	}
+	
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
 	}
 
 	@Override

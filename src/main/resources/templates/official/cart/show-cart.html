@@ -165,7 +165,7 @@
 										<td class="p-4">
 											<div class="media align-items-center">
 												<img
-													src="https://bootdey.com/img/Content/avatar/avatar1.png"
+													th:src="${product.img}"
 													class=" d-block ui-w-40 ui-bordered mr-4 object-fit-cover border rounded item-cart-avt"
 													alt="">
 												<div class="media-body">
@@ -181,12 +181,12 @@
 											</div>
 										</td>
 										<td class="text-right font-weight-semibold align-middle p-4"
-											th:text="${product.price}">$57.55</td>
+											th:text="'$' + ${product.price}">$57.55</td>
 										<td class="align-middle p-4"><input disabled type="text"
 											class="form-control text-center"
 											th:value="${product.quantity}"></td>
 										<td class="text-right font-weight-semibold align-middle p-4"
-											th:text="${product.total}">$115.1</td>
+											th:text="'$' + ${product.total}">$115.1</td>
 										<td>
 											<table class="table">
 												<tbody>
