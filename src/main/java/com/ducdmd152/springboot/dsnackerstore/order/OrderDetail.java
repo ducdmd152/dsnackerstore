@@ -1,11 +1,17 @@
 package com.ducdmd152.springboot.dsnackerstore.order;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.ducdmd152.springboot.dsnackerstore.product.Product;
 
 @Entity
 @Table(name = "order_detail")
@@ -15,8 +21,12 @@ public class OrderDetail {
 	@Column(name="id")
 	private int id;
 	
-	@Column(name="sku")
-	private String sku;
+//	@Column(name="sku")
+//	private String sku;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "sku")
+	private Product product;
 	
 	@Column(name="price")
 	private float price;
@@ -41,16 +51,24 @@ public class OrderDetail {
 		this.id = id;
 	}
 
-	public String getSku() {
-		return sku;
-	}
-
-	public void setSku(String sku) {
-		this.sku = sku;
-	}
-
+//	public String getSku() {
+//		return sku;
+//	}
+//
+//	public void setSku(String sku) {
+//		this.sku = sku;
+//	}
+	
 	public float getPrice() {
 		return price;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
 	public void setPrice(float price) {
@@ -73,6 +91,12 @@ public class OrderDetail {
 		this.total = total;
 	}
 
+	@Override
+	public String toString() {
+		return "OrderDetail [id=" + id + ", product=" + product + ", price=" + price + ", quantity=" + quantity
+				+ ", total=" + total + "]";
+	}
+
 //	public int getOrderId() {
 //		return orderId;
 //	}
@@ -80,12 +104,6 @@ public class OrderDetail {
 //	public void setOrderId(int orderId) {
 //		this.orderId = orderId;
 //	}
-
-	@Override
-	public String toString() {
-		return "{id=" + id + ", sku=" + sku + ", price=" + price + ", quantity=" + quantity + ", total="
-				+ total + "}";
-	}
 	
 	
 }
