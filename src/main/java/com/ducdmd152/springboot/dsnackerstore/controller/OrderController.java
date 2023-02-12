@@ -107,7 +107,7 @@ public class OrderController {
 			CartModel cart = (CartModel) session.getAttribute("CART");
 			if(cart!=null) {
 				for(OrderDetail orderDetail : order.getOrderDetails()) {
-					cart.removeItemFromCart(orderDetail.getSku());
+					cart.removeItemFromCart(orderDetail.getProduct().getSku());
 				}
 			}
 			

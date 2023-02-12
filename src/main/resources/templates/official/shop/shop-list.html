@@ -195,7 +195,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<h3 class="agileits-sear-head">Search Here..</h3>
 						<form action="#" method="post">
 							<input type="search" placeholder="Product name..." name="search"
-								required=""> <input type="submit" value=" ">
+								required="">
+								<input disabled="disabled" type="submit" value="Go" style="color: white; cursor: pointer;">
 						</form>
 					</div>
 					<!-- price range -->
@@ -261,7 +262,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<div class="men-pro-item">
 										<div class="men-thumb-item"
 											onclick="location.href='somewhere'">
-											<img th:src="@{/assets/images/s2.jpg}" alt="View more">
+											<img th:src="${product.img}" alt="View more" class="product-img">
 											<span class="product-new-top">New</span>
 										</div>
 										<div class="item-info-product">
@@ -273,23 +274,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 												<div class="grid_meta">
 													<div class="product_price">
 														<div class="grid-price ">
-															<span class="money " th:text="${product.price}"></span>
+															<span class="money " th:text="'$' + ${product.price}"></span>														
 														</div>
 													</div>
 													<ul class="stars">
-														<li><a th:href="@{/assets/#}"><i
+														<li><a href="#"><i
 																class="fa fa-star" aria-hidden="true"></i></a></li>
-														<li><a th:href="@{/assets/#}"><i
+														<li><a href="#"><i
 																class="fa fa-star" aria-hidden="true"></i></a></li>
-														<li><a th:href="@{/assets/#}"><i
+														<li><a href="#"><i
 																class="fa fa-star" aria-hidden="true"></i></a></li>
-														<li><a th:href="@{/assets/#}"><i
+														<li><a href="#"><i
 																class="fa fa-star" aria-hidden="true"></i></a></li>
-														<li><a th:href="@{/assets/#}"><i
-																class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
+														<li><a href="#"><i
+																class="fa fa-star" aria-hidden="true"></i></a></li>
 													</ul>
-												</div>
+													<span class="money fst-italic" th:text="'Rest quantity: ' + ${product.quantity}"></span>
+												</div>												
 												<div class="shoe single-item hvr-outline-out">
+													
 													<form action="#" th:action="@{/cart/addToCart}"
 														method="POST">
 														<input type="hidden" th:name="productId"

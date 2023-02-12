@@ -28,6 +28,7 @@ public class ProductUtil {
 		productModel.setPrice(product.getPrice());
 		productModel.setQuantity(product.getQuantity());
 		productModel.setStatus(product.isStatus());
+		productModel.setImg(product.getImg());
 		return productModel;
 	}
 	
@@ -39,6 +40,7 @@ public class ProductUtil {
 		product.setPrice(productModel.getPrice());
 		product.setQuantity(productModel.getQuantity());
 		product.setStatus(productModel.isStatus());
+		product.setImg(productModel.getImg());
 		return product;
 	}
 	

@@ -11,6 +11,7 @@ import com.ducdmd152.springboot.dsnackerstore.cart.CartModel;
 import com.ducdmd152.springboot.dsnackerstore.order.Order;
 import com.ducdmd152.springboot.dsnackerstore.order.OrderDetail;
 import com.ducdmd152.springboot.dsnackerstore.product.ProductModel;
+import com.ducdmd152.springboot.dsnackerstore.product.ProductService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -20,6 +21,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class OrderUtil {
 	@Autowired
 	private ProductUtil productUtil;
+	@Autowired
+	private ProductService productService;
 
 	public Order genOrderBy(CartModel cart, String[] checkedItems) {
 		if (cart == null) {
@@ -40,7 +43,7 @@ public class OrderUtil {
 			return null;
 		}
 		OrderDetail orderDetail = new OrderDetail();
-		orderDetail.setSku(productModel.getSku());
+		orderDetail.setProduct(productService.getProduct(productModel.getSku()));
 		orderDetail.setPrice(productModel.getPrice());
 		orderDetail.setQuantity(productModel.getQuantity());
 		orderDetail.setTotal(productModel.getTotal());
@@ -101,7 +104,7 @@ public class OrderUtil {
 			int requestQuantity = orderDetail.getQuantity();
 			int availableQuantity = 0;
 
-			ProductModel product = productUtil.getProductSyncOrderedQuantity(orderDetail.getSku());
+			ProductModel product = productUtil.getProductSyncOrderedQuantity(orderDetail.getProduct().getSku());
 			if (product != null) {
 				availableQuantity = product.getQuantity();
 			}

@@ -1,3 +1,15 @@
+button.shoe-cart:hover {
+	background: #56a3ed !important;
+}
+ul.stars li a:hover {
+    color: #faf87b !important;
+}
+.product-img {
+	min-height: 200px;
+	height: 12vh;
+	object-fit: cover;
+}
+
 /*-- cart-css --*/ 
 #staplesbmincart form {
     position: relative;

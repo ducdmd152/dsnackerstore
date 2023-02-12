@@ -183,15 +183,10 @@ public class CartModel {
         List<ProductModel> result = new ArrayList<>();
         
         for (String sku : this.items.keySet()) {
-        	System.out.println(productService);
             Product entity = productService.getProduct(sku);
-
-            String name = entity.getName();
-            String description = entity.getDescription();
-            float price = entity.getPrice();
+            ProductModel productInCart = productUtil.productToProductModel(entity);
             int quantity = this.items.get(sku);
-
-            ProductModel productInCart = new ProductModel(sku, name, description, quantity, price);
+            productInCart.setQuantity(quantity);
             
             result.add(productInCart);
         }
