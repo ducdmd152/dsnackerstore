@@ -59,7 +59,8 @@ public class OrderController {
 			// send to view
 			model.addAttribute("ORDER", orderFromView);
 			model.addAttribute("PREPARED_ORDER_KEY", preparedOrderKey);
-			return "raw/cart/checkout";
+//			return "raw/cart/checkout";
+			return "official/cart/checkout";
 		}
 		
 		// case session errors
@@ -69,14 +70,16 @@ public class OrderController {
 		if(preparedOrders == null) {
 			model.addAttribute("ERROR_MASSAGE", "The order is NOT in prepered orders"
 					+ ", may be this order is done successfully or canceled.");
-			return "raw/order/orderFail";
+//			return "raw/order/orderFail";
+			return "official/order/orderFail";
 		}
 		
 		Order order = preparedOrders.get(preparedOrderKey);
 		if(order == null) {
 			model.addAttribute("ERROR_MASSAGE", "The order is NOT in prepered orders"
 					+ ", may be this order is done successfully or canceled.");
-			return "raw/order/orderFail";
+//			return "raw/order/orderFail";
+			return "official/order/orderFail";
 		}
 		
 		// update order from user's input
@@ -119,7 +122,8 @@ public class OrderController {
 			return "redirect:/order/showOrder?id=" + order.getId();
 		}
 		else {
-			return "raw/order/orderFail";
+//			return "raw/order/orderFail";
+			return "official/order/orderFail";
 		}
 	}
 	
@@ -128,6 +132,7 @@ public class OrderController {
 		Order order = orderService.getOrder(id);
 		
 		model.addAttribute("ORDER", order);
-		return "raw/order/orderSuccess";
+//		return "raw/order/orderSuccess";
+		return "official/order/orderSuccess";
 	}
 }

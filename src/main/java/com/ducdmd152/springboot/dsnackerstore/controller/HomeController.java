@@ -31,6 +31,6 @@ public class HomeController {
 	
 	@GetMapping("/fail")
 	public String fail() {
-		return "raw/exceptions/fault";
+		return "error";
 	}
 }

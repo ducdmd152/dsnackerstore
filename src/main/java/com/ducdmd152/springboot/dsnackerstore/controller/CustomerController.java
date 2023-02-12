@@ -35,6 +35,7 @@ public class CustomerController {
 		
 		model.addAttribute("STATUS", status);
 		model.addAttribute("ORDERS", orders);
-		return "raw/customer/showOrders";
+//		return "raw/customer/showOrders";
+		return "official/customer/showOrders";
 	}
 }
