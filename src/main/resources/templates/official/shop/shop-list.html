@@ -261,13 +261,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<div class="product-shoe-info shoe">
 									<div class="men-pro-item">
 										<div class="men-thumb-item"
-											onclick="location.href='somewhere'">
+											onclick="location.href='#'">
 											<img th:src="${product.img}" alt="View more" class="product-img">
 											<span class="product-new-top">New</span>
 										</div>
 										<div class="item-info-product">
 											<h4>
-												<a th:href="@{/shop/details(id=${product.sku})}"
+												<!-- @{/shop/details(id=${product.sku})} -->
+												<a href="#"
 													th:text="${product.name}" class="item-info-product-title"></a>
 											</h4>
 											<div class="info-product-price">

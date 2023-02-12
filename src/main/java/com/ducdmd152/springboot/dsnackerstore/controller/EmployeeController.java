@@ -58,7 +58,8 @@ public class EmployeeController {
 		model.addAttribute("STATUS", status);
 		model.addAttribute("ORDERS", orders);
 		
-		return "raw/employee/showOrders";
+//		return "raw/employee/showOrders";
+		return "official/employee/showOrders";
 	}
 	
 	@GetMapping("/showOrderDetails")
@@ -69,7 +70,8 @@ public class EmployeeController {
 		Order order = orderService.getOrder(orderId);
 		
 		model.addAttribute("ORDER", order);
-		return "raw/employee/showOrderDetails";
+//		return "raw/employee/showOrderDetails";
+		return "official/employee/showOrderDetails";
 	}
 	
 	@PostMapping("/setOrderStatus")
@@ -95,7 +97,8 @@ public class EmployeeController {
 		
 		model.addAttribute("PRODUCTS", products);
 		
-		return "raw/employee/showProducts";
+//		return "raw/employee/showProducts";
+		return "official/employee/showProducts";
 	}
 	
 	@GetMapping("/showCreateProduct")
@@ -107,7 +110,8 @@ public class EmployeeController {
 		
 		model.addAttribute("PRODUCT", product);
 		
-		return "raw/employee/showCreateProduct";
+//		return "raw/employee/showCreateProduct";
+		return "official/employee/showCreateProduct";
 	}
 	
 	@PostMapping("/createProduct")
@@ -118,13 +122,15 @@ public class EmployeeController {
 			) {
 		if(bindingResult.hasErrors()) {
 			model.addAttribute("PRODUCT", product);
-			return "raw/employee/showCreateProduct";
+//			return "raw/employee/showCreateProduct";
+			return "official/employee/showCreateProduct";
 		}
 		
 		if(productService.checkExist(product.getSku())) {
 			model.addAttribute("PRODUCT", product);
 			model.addAttribute("DUPLICATED_SKU_ERROR", true);
-			return "raw/employee/showCreateProduct";
+//			return "raw/employee/showCreateProduct";
+			return "official/employee/showCreateProduct";
 		}
 		
 		productService.saveProduct(product);
@@ -143,7 +149,8 @@ public class EmployeeController {
 		
 		model.addAttribute("PRODUCT", product);
 		
-		return "raw/employee/showEditProduct";
+//		return "raw/employee/showEditProduct";
+		return "official/employee/showEditProduct";
 	}
 	
 	@PostMapping("/editProduct")
@@ -154,7 +161,8 @@ public class EmployeeController {
 			) {
 		if(bindingResult.hasErrors()) {
 			model.addAttribute("PRODUCT", productModel);
-			return "raw/employee/showEditProduct";
+//			return "raw/employee/showEditProduct";
+			return "official/employee/showEditProduct";
 		}
 		
 		Product product = productUtil.syncEditedProductModelToProduct(productModel);

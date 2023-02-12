@@ -50,7 +50,8 @@ public class RegistrationController {
 		UserDetail userDetail = new UserDetail();
 		model.addAttribute("USER", user);
 		model.addAttribute("USER_DETAIL", userDetail);
-		return "raw/registration/register";
+//		return "raw/registration/register";
+		return "official/registration/register";
 	}
 
 	@PostMapping("/performRegister")
@@ -63,11 +64,13 @@ public class RegistrationController {
 //		System.out.println(bindingUserResult.hasErrors());
 //		System.out.println(bindingUserDetailResult.hasErrors());
 		if(bindingUserResult.hasErrors() || bindingUserDetailResult.hasErrors()) {			
-			return "raw/registration/register";
+//			return "raw/registration/register";
+			return "official/registration/register";
 		}
 		else if (userService.checkExist(user.getUsername())){
 			model.addAttribute("DUPLICATED_USERNAME_ERROR", true);
-			return "raw/registration/register";
+//			return "raw/registration/register";
+			return "official/registration/register";
 		}
 		else {
 			user.setUserDetail(userDetail);

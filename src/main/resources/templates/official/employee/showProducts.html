@@ -1,0 +1,178 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Product Management</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+	crossorigin="anonymous">
+<link th:href="@{/myassets/css/cart/checkout.css}" rel="stylesheet">
+</head>
+
+<body>
+	<header>
+		<link rel="stylesheet" th:href="@{/assets/css/fontawesome.min.css}">
+
+		<nav class="navbar navbar-expand-lg navbar-light shadow">
+
+			<div
+				class="container d-flex justify-content-between align-items-center">
+
+				<a
+					class="navbar-brand text-success logo h1 align-self-center ds-logo-text"
+					th:href="@{/}"> DSnacker </a>
+
+				<button class="navbar-toggler border-0" type="button"
+					data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav"
+					aria-controls="navbarSupportedContent" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div
+					class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between"
+					id="templatemo_main_nav">
+					<div class="flex-fill">
+						<ul
+							class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
+							<li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+							<li class="nav-item"><a th:href="@{/employee/showProducts}"
+								class="nav-link">Product Management</a></li>
+							<li class="nav-item"><a th:href="@{/employee/showOrders}"
+								class="nav-link">Order Management</a></li>
+						</ul>
+					</div>
+					<div class="navbar align-self-center d-flex">
+						<div
+							class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
+							<div class="input-group">
+								<input type="text" class="form-control" id="inputMobileSearch"
+									placeholder="Search ...">
+								<div class="input-group-text">
+									<i class="fa fa-fw fa-search"></i>
+								</div>
+							</div>
+						</div>
+
+						<a class="nav-icon d-none d-lg-inline" href="#"
+							data-bs-toggle="modal" data-bs-target="#templatemo_search"> <i
+							class="fa fa-fw fa-search text-dark mr-2"
+							style="font-size: 28px;"></i>
+						</a>
+						<!-- CART -->
+						<a sec:authorize="isAuthenticated()" style="margin-right: 28px"
+							href="#" class="nav-icon position-relative text-decoration-none">
+							<i class="fa fa-fw fa-user text-dark mr-3"
+							style="font-size: 28px; color: #47ade1 !important;"></i> <span
+							style="color: #47ade1 !important;"
+							th:text="${#authentication.getPrincipal().getUsername()}"
+							class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">
+						</span>
+						</a>
+						<form action="#" th:action="@{/logout}" method="POST"
+							sec:authorize="isAuthenticated()">
+							<button type="submit" class="btn btn-outline-info btn-sm">Logout</button>
+						</form>
+					</div>
+				</div>
+
+			</div>
+		</nav>
+		<!-- Close Header -->
+
+		<!-- Modal -->
+		<div class="modal fade bg-white" id="templatemo_search" tabindex="-1"
+			role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="w-100 pt-1 mb-5 text-right">
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<form action="" method="get"
+					class="modal-content modal-body border-0 p-0">
+					<div class="input-group mb-2">
+						<input type="text" class="form-control" id="inputModalSearch"
+							name="q" placeholder="Search ...">
+						<button type="submit"
+							class="input-group-text bg-success text-light">
+							<i class="fa fa-fw fa-search text-white"></i>
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		<link rel="stylesheet" th:href="@{/myassets/css/home.css}">
+		<!-- Start Script -->
+		<script th:src="@{/assets/js/jquery-1.11.0.min.js}"></script>
+		<script th:src="@{/assets/js/jquery-migrate-1.2.1.min.js}"></script>
+		<script th:src="@{/assets/js/bootstrap.bundle.min.js}"></script>
+		<script th:src="@{/assets/js/templatemo.js}"></script>
+		<script th:src="@{/assets/js/custom.js}"></script>
+		<!-- End Script -->
+	</header>
+	
+	<div id="snippetContent">
+		<link rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/css/bootstrap.min.css">
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/js/bootstrap.bundle.min.js"></script>
+		<div class="container px-3 my-5 clearfix">
+			<form th:action="@{/cart/performSelectedItems}" method="POST">
+				<div class="card">
+					<div class="card-header d-flex justify-content-between">
+						<h2>Products in store</h2>
+						<a th:href="@{/employee/showCreateProduct}" class="btn btn-primary btn">Create new product</a>
+					</div>
+					<div class="card-body">
+						<div class="table-responsive">
+							<table class="table table-bordered m-0">
+								<thead>
+									<tr>
+										<th class="text-center py-3 px-4" style="min-width: 400px;">Product</th>
+										<th class="text-right py-3 px-4" style="width: 100px;">Price</th>
+										<th class="text-center py-3 px-4" style="width: 120px;">Quantity</th>
+										<th class="text-right py-3 px-4" style="width: 100px;">Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="product : ${PRODUCTS}">
+										<td class="p-4">
+											<div class="media align-items-center">
+												<img th:src="${product.img}"
+													class=" d-block ui-w-40 ui-bordered mr-4 object-fit-cover border rounded item-cart-avt"
+													alt="">
+												<div class="media-body">
+													<a href="#" class="d-block text-dark"
+														th:text="${product.name}"></a> <small> <span
+														class="text-muted" th:text="'SKU: ' + ${product.sku}"></span>
+														<!-- <span class="text-muted"> Color: ... </span> <span
+													class="ui-product-color ui-product-color-sm align-text-bottom"
+													style="background: #e81e2c;"></span> &nbsp; <span
+													class="text-muted">Size: ... </span> -->
+													</small>
+												</div>
+											</div>
+										</td>
+										<td class="text-right font-weight-semibold align-middle p-4"
+											th:text="'$' + ${product.price}">$57.55</td>
+										<td class="align-middle p-4"><span
+												class="form-control text-center"
+												th:text="${product.quantity}"/>
+												</td>
+										<td  class="align-middle p-4"><a
+											th:href="@{/employee/showEditProduct(id=${product.sku})}"
+											class="btn btn-info btn-sm"> Edit </a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	<link rel="stylesheet" th:href="@{/myassets/css/home.css}">
+</body>
+
+</html>
