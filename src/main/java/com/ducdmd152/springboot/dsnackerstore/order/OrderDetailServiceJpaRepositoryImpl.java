@@ -24,7 +24,10 @@ public class OrderDetailServiceJpaRepositoryImpl implements OrderDetailService {
 		
 		if(orderDetails!=null) {
 			for(OrderDetail orderDetail : orderDetails) {
-				result += orderDetail.getQuantity();
+				String status = orderDetail.getOrder().getStatus();
+				if(status.equals("pending") || status.equals("confirmed")) {
+					result += orderDetail.getQuantity();
+				}
 			}
 		}
 		

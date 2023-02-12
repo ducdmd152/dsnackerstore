@@ -39,7 +39,10 @@ public class OrderDetail {
 	
 //	@Column(name="order_id")
 //	private int orderId;
-
+	@ManyToOne
+    @JoinColumn(name = "order_id")
+	private Order order;
+	
 	public OrderDetail() {
 	}
 
@@ -97,6 +100,15 @@ public class OrderDetail {
 				+ ", total=" + total + "]";
 	}
 
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+
+	
 //	public int getOrderId() {
 //		return orderId;
 //	}

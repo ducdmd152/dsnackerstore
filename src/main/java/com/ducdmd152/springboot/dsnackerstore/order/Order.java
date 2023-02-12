@@ -54,8 +54,10 @@ public class Order {
 	@Column(name="status")
     private String status;
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "order_id")
+//	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//	@JoinColumn(name = "order_id")
+	@OneToMany(mappedBy = "order",
+			fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<OrderDetail> orderDetails;
 	public void addOrderDetail(OrderDetail orderDetail) {
 		if(orderDetail==null) {
@@ -67,7 +69,7 @@ public class Order {
 		}
 		total+=orderDetail.getTotal();
 		orderDetails.add(orderDetail);
-//		orderDetail.setOrderId(id);
+		orderDetail.setOrder(this);
 	}
 	
 	public List<OrderDetail> getOrderDetails() {
