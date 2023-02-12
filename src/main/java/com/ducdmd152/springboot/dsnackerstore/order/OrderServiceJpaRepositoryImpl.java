@@ -19,12 +19,12 @@ public class OrderServiceJpaRepositoryImpl
 
 	@Override
 	public List<Order> getOrders() {
-		return orderJpaRepository.findAll();
+		return orderJpaRepository.findAllByOrderByDateBuyDesc();
 	}
 
 	@Override
 	public List<Order> getOrdersWithStatus(String status) {
-		return orderJpaRepository.findAllByStatus(status);
+		return orderJpaRepository.findAllByStatusOrderByDateBuyDesc(status);
 	}
 
 	@Override
@@ -41,11 +41,11 @@ public class OrderServiceJpaRepositoryImpl
 
 	@Override
 	public List<Order> getOrdersByUser(String username) {
-		return orderJpaRepository.findAllByUsername(username);
+		return orderJpaRepository.findAllByUsernameOrderByDateBuyDesc(username);
 	}
 
 	@Override
 	public List<Order> getOrdersByUserWithStatus(String username, String status) {
-		return orderJpaRepository.findAllByUsernameAndStatus(username, status);
+		return orderJpaRepository.findAllByUsernameAndStatusOrderByDateBuyDesc(username, status);
 	}
 }

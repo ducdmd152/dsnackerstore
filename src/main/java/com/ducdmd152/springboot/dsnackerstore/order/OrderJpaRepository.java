@@ -12,4 +12,12 @@ public interface OrderJpaRepository extends JpaRepository<Order, Integer> {
 
 	List<Order> findAllByUsernameAndStatus(String username, String status);
 
+	List<Order> findAllByStatusOrderByDateBuyDesc(String status);
+
+	List<Order> findAllByOrderByDateBuyDesc();
+
+	List<Order> findAllByUsernameOrderByDateBuyDesc(String username);
+
+	List<Order> findAllByUsernameAndStatusOrderByDateBuyDesc(String username, String status);
+
 }

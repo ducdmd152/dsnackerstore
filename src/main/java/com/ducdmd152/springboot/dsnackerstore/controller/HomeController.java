@@ -23,7 +23,7 @@ public class HomeController {
 			return "customer";
 		}
 		else if(request.isUserInRole("ROLE_EMPLOYEE")) {
-			return "home";
+			return "employee";
 		}
 		
 		return "guest";
