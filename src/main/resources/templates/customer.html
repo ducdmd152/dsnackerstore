@@ -6,21 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="apple-touch-icon" href="assets/img/apple-icon.png">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
-
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/templatemo.css">
-    <link rel="stylesheet" href="assets/css/custom.css">
-
-    <!-- Load fonts style after rendering the layout styles -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
-    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
-	<style type="text/css">
-		#templatemo_main_nav .navbar .nav-icon {
-			margin-right: 28px
-		}
-	</style>
+    <link rel="apple-touch-icon" th:href="@{/assets/img/apple-icon.png}">
 <!--
     
 // ..............................
@@ -29,92 +15,123 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light shadow">
-        <div class="container d-flex justify-content-between align-items-center">
+	<header>
+		<link rel="stylesheet" th:href="@{/assets/css/fontawesome.min.css}">
 
-            <a class="navbar-brand text-success logo h1 align-self-center" href="@{/}">
-                DSnacker
-            </a>
+		<nav class="navbar navbar-expand-lg navbar-light shadow">
 
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+			<div
+				class="container d-flex justify-content-between align-items-center">
 
-            <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between" id="templatemo_main_nav">
-                <div class="flex-fill">
-                    <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/}">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/shop/list}">Shop</a>
-                        </li>
-                       <li class="nav-item">
-                            <a sec:authorize="isAnonymous()" th:href="@{/registration/showLogin}" class="nav-link">Login</a>
-                        </li>
-                                                <li class="nav-item">
-                            <a class="nav-link" th:href="@{/}">About</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="navbar align-self-center d-flex">
-                    <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="inputMobileSearch" placeholder="Search ...">
-                            <div class="input-group-text">
-                                <i class="fa fa-fw fa-search"></i>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
-                        <i class="fa fa-fw fa-search text-dark mr-2"
-                        style="font-size: 28px;"
-                        ></i>
-                    </a>
-                    <!-- CART -->
-                    <a class="nav-icon position-relative text-decoration-none mr-4" href="/cart/viewCart">
-                        <i class="fa fa-fw fa-cart-arrow-down text-dark mr-2"
-                        	style="font-size: 28px;"
-                        ></i>
-                        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">
-                        Cart
-                        </span>
-                    </a>
-                    <a class="nav-icon position-relative text-decoration-none"  th:href="@{/registration/showLogin}">
-                        <i class="fa fa-fw fa-user text-dark mr-3"
-                        style="font-size: 28px;"
-                        ></i>
-                        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">
-                        <!--  th:text ="${#authentication.getPrincipal().getUser().getFirstName()}" -->
-                        </span>
-                    </a>
-                </div>
-            </div>
+				<a
+					class="navbar-brand text-success logo h1 align-self-center ds-logo-text"
+					th:href="@{/}"> DSnacker </a>
 
-        </div>
-    </nav>
-    <!-- Close Header -->
+				<button class="navbar-toggler border-0" type="button"
+					data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav"
+					aria-controls="navbarSupportedContent" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
 
-    <!-- Modal -->
-    <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="w-100 pt-1 mb-5 text-right">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="" method="get" class="modal-content modal-body border-0 p-0">
-                <div class="input-group mb-2">
-                    <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search ...">
-                    <button type="submit" class="input-group-text bg-success text-light">
-                        <i class="fa fa-fw fa-search text-white"></i>
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
+				<div
+					class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between"
+					id="templatemo_main_nav">
+					<div class="flex-fill">
+						<ul
+							class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
+							<li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+							<li class="nav-item"><a class="nav-link" href="/shop/list">Shop</a>
+							</li>
+							<li class="nav-item" sec:authorize="isAnonymous()"><a
+								th:href="@{/registration/showRegister}" class="nav-link">Register</a>
+							</li>
+							<li class="nav-item" sec:authorize="isAuthenticated()"><a
+								th:href="@{/customer/showOrders}" class="nav-link">My orders</a></li>
+							<li class="nav-item"><a class="nav-link" href="/">About</a></li>
+						</ul>
+					</div>
+					<div class="navbar align-self-center d-flex">
+						<div
+							class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
+							<div class="input-group">
+								<input type="text" class="form-control" id="inputMobileSearch"
+									placeholder="Search ...">
+								<div class="input-group-text">
+									<i class="fa fa-fw fa-search"></i>
+								</div>
+							</div>
+						</div>
 
+						<a class="nav-icon d-none d-lg-inline" href="#"
+							data-bs-toggle="modal" data-bs-target="#templatemo_search"> <i
+							class="fa fa-fw fa-search text-dark mr-2"
+							style="font-size: 28px;"></i>
+						</a>
+						<!-- CART -->
+						<a class="nav-icon position-relative text-decoration-none mr-4"
+							href="/cart/viewCart"> <i
+							class="fa fa-fw fa-cart-arrow-down text-dark mr-2"
+							style="font-size: 28px;"></i> <span
+							class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">
+								Cart </span>
+						</a> <a sec:authorize="isAnonymous()" style="margin-right: 28px"
+							th:href="@{/registration/showLogin}"
+							class="nav-icon position-relative text-decoration-none"> <i
+							class="fa fa-fw fa-user text-dark mr-3" style="font-size: 28px;"></i>
+							<span
+							class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">
+								Login </span>
+						</a> <a sec:authorize="isAuthenticated()" style="margin-right: 28px"
+							href="#" class="nav-icon position-relative text-decoration-none">
+							<i class="fa fa-fw fa-user text-dark mr-3"
+							style="font-size: 28px;"></i> <span
+							th:text="${#authentication.getPrincipal().getUsername()}"
+							class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">
+						</span>
+						</a>
+						<form action="#" th:action="@{/logout}" method="POST"
+							sec:authorize="isAuthenticated()">
+							<button type="submit" class="btn btn-outline-info btn-sm">Logout</button>
+						</form>
+					</div>
+				</div>
 
+			</div>
+		</nav>
+		<!-- Close Header -->
 
+		<!-- Modal -->
+		<div class="modal fade bg-white" id="templatemo_search" tabindex="-1"
+			role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="w-100 pt-1 mb-5 text-right">
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<form action="" method="get"
+					class="modal-content modal-body border-0 p-0">
+					<div class="input-group mb-2">
+						<input type="text" class="form-control" id="inputModalSearch"
+							name="q" placeholder="Search ...">
+						<button type="submit"
+							class="input-group-text bg-success text-light">
+							<i class="fa fa-fw fa-search text-white"></i>
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		<link rel="stylesheet" th:href="@{/myassets/css/home.css}">
+		<!-- Start Script -->
+		<script th:src="@{/assets/js/jquery-1.11.0.min.js}"></script>
+		<script th:src="@{/assets/js/jquery-migrate-1.2.1.min.js}"></script>
+		<script th:src="@{/assets/js/bootstrap.bundle.min.js}"></script>
+		<script th:src="@{/assets/js/templatemo.js}"></script>
+		<script th:src="@{/assets/js/custom.js}"></script>
+		<!-- End Script -->
+	</header>
+	
     <!-- Start Banner Hero -->
     <div id="template-mo-zay-hero-carousel" class="carousel slide" data-bs-ride="carousel">
         <ol class="carousel-indicators">
@@ -127,62 +144,37 @@
                 <div class="container">
                     <div class="row p-5">
                         <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
-                            <img class="img-fluid" src="./assets/img/banner_img_01.jpg" alt="">
+                            <img class="img-fluid" src="https://images.unsplash.com/flagged/photo-1556637640-2c80d3201be8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="">
                         </div>
                         <div class="col-lg-6 mb-0 d-flex align-items-center">
                             <div class="text-align-left align-self-center">
-                                <h1 class="h1 text-success"><b>Zay</b> eCommerce</h1>
-                                <h3 class="h2">Tiny and Perfect eCommerce Template</h3>
+                                <h1 class="h1 ds-logo-text"><b>DSnacker</b> Store</h1>
+                                <h3 class="h2">Shoes online shopping.</h3>
                                 <p>
-                                    Zay Shop is an eCommerce HTML5 CSS template with latest version of Bootstrap 5 (beta 1). 
-                                    This template is 100% free provided by <a rel="sponsored" class="text-success" href="https://templatemo.com" target="_blank">TemplateMo</a> website. 
-                                    Image credits go to <a rel="sponsored" class="text-success" href="https://stories.freepik.com/" target="_blank">Freepik Stories</a>,
-                                    <a rel="sponsored" class="text-success" href="https://unsplash.com/" target="_blank">Unsplash</a> and
-                                    <a rel="sponsored" class="text-success" href="https://icons8.com/" target="_blank">Icons 8</a>.
                                 </p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="carousel-item">
+			<div class="carousel-item">
                 <div class="container">
                     <div class="row p-5">
                         <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
-                            <img class="img-fluid" src="./assets/img/banner_img_02.jpg" alt="">
+                            <img class="img-fluid" src="https://images.unsplash.com/photo-1560769629-975ec94e6a86?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c25lYWtlciUyMGFkaWRhc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=2000&q=60" alt="">
                         </div>
                         <div class="col-lg-6 mb-0 d-flex align-items-center">
-                            <div class="text-align-left">
-                                <h1 class="h1">Proident occaecat</h1>
-                                <h3 class="h2">Aliquip ex ea commodo consequat</h3>
+                            <div class="text-align-left align-self-center">
+                                <h1 class="h1 ds-logo-text"><b>DSnacker</b> Store</h1>
+                                <h3 class="h2">Shoes online shopping.</h3>
                                 <p>
-                                    You are permitted to use this Zay CSS template for your commercial websites. 
-                                    You are <strong>not permitted</strong> to re-distribute the template ZIP file in any kind of template collection websites.
                                 </p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="carousel-item">
-                <div class="container">
-                    <div class="row p-5">
-                        <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
-                            <img class="img-fluid" src="./assets/img/banner_img_03.jpg" alt="">
-                        </div>
-                        <div class="col-lg-6 mb-0 d-flex align-items-center">
-                            <div class="text-align-left">
-                                <h1 class="h1">Repr in voluptate</h1>
-                                <h3 class="h2">Ullamco laboris nisi ut </h3>
-                                <p>
-                                    We bring you 100% free CSS templates for your websites. 
-                                    If you wish to support TemplateMo, please make a small contribution via PayPal or tell your friends about our website. Thank you.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                
         </div>
         <a class="carousel-control-prev text-decoration-none w-auto ps-3" href="#template-mo-zay-hero-carousel" role="button" data-bs-slide="prev">
             <i class="fas fa-chevron-left"></i>
@@ -242,13 +234,7 @@
     </footer>
     <!-- End Footer -->
 
-    <!-- Start Script -->
-    <script src="assets/js/jquery-1.11.0.min.js"></script>
-    <script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/templatemo.js"></script>
-    <script src="assets/js/custom.js"></script>
-    <!-- End Script -->
+   
 </body>
 
 </html>

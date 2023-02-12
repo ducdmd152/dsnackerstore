@@ -2,17 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>Shopping</title>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
-	crossorigin="anonymous">
-	<link th:href="@{/myassets/css/customer/showOrders.css}" rel="stylesheet">
+<title>DSnacker | Checkout</title>
+<link th:href="@{/myassets/css/cart/checkout.css}" rel="stylesheet">
 </head>
 
 <body>
-	<header>
+<header>
 		<link rel="stylesheet" th:href="@{/assets/css/fontawesome.min.css}">
 
 		<nav class="navbar navbar-expand-lg navbar-light shadow">
@@ -128,93 +123,108 @@
 		<script th:src="@{/assets/js/custom.js}"></script>
 		<!-- End Script -->
 	</header>
-	<div class="container mt-4">
-		<h3>My Orders</h3>
-		<hr>
+	
+	<a th:href="@{/cart/viewCart}" class="btn btn-outline-primary btn mt-2 ml-2">Back
+			to cart</a>
+	<div class="container">
+		<!-- FORM FOR DELIVERY -->
+		
+		<div class="form-delivery">			
+			<form th:action="@{/order/makeOrder}" th:object="${ORDER}"
+				method="POST" class="needs-validation">
+				<h3>Delivery Information</h3>
+				<div class="mb-3 input-wrapper">
+					<label class="mb-2 text-muted" for="name">Your name</label> <input
+						th:field="*{name}" class="form-control"> <small
+						class="text-danger fst-italic"
+						th:if="${#fields.hasErrors('name')}" th:errors="*{name}" />
+				</div>
 
-		<div class="order-status">
-			
-			<a href="showOrders" 
-			th:if="${STATUS==null}"
-			class="badge bg-primary text-decoration-none">All</a>
-			<a href="showOrders" 
-			th:if="${STATUS!=null}"
-			class="badge bg-secondary text-decoration-none">All</a>
-			
-			
-			<a href="showOrders?status=pending" 
-			th:if="${STATUS == 'pending'}"
-			class="badge bg-primary text-decoration-none">pending</a>
-			<a href="showOrders?status=pending" 
-			th:if="${STATUS != 'pending'}"
-			class="badge bg-secondary text-decoration-none">pending</a>
-			
-			<a href="showOrders?status=confirmed" 
-			th:if="${STATUS=='confirmed'}"
-			class="badge bg-primary text-decoration-none">confirmed</a>
-			<a href="showOrders?status=confirmed" 
-			th:if="${STATUS!='confirmed'}"
-			class="badge bg-secondary text-decoration-none">confirmed</a>
-			
-			<a href="showOrders?status=refused" 
-			th:if="${STATUS=='refused'}"
-			class="badge bg-primary text-decoration-none">refused</a>
-			<a href="showOrders?status=refused" 
-			th:if="${STATUS!='refused'}"
-			class="badge bg-secondary text-decoration-none">refused</a>
+				<div class="mb-3 input-wrapper">
+					<label class="mb-2 text-muted" for="phone">Phone</label> <input
+						type="text" th:field="*{phone}" class="form-control"> <small
+						class="text-danger fst-italic"
+						th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" />
+				</div>
+
+				<div class="mb-3 input-wrapper">
+					<label class="mb-2 text-muted" for="address">Address</label> <input
+						type="text" th:field="*{address}" class="form-control"> <small
+						class="text-danger fst-italic"
+						th:if="${#fields.hasErrors('*{address}')}" th:errors="*{address}" />
+				</div>
+
+				<div class="col-md-12 text-center">
+					<button type="submit" class="btn btn-primary ms-auto">Make
+						an order</button>
+				</div>
+				<hr>
+				<input type="hidden" th:name="preparedOrderKey"
+					th:value="${PREPARED_ORDER_KEY}">
+			</form>
 		</div>
-		<hr>
-		<table class="table table-bordered table-striped">
-			<thead class="table-dark">
-				<th>ID</th>
-				<th>Date</th>
-				<th>Name</th>
-				<th>Phone</th>
-				<th class="order_address">Address</th>
-				<th>Total</th>
-				<th>Status</th>
-				<th>Actions</th>
-			</thead>
-
-			<tbody>
-				<tr th:each="order : ${ORDERS}">
-					<td th:text="${order.id}" />
-					<td th:text="${order.dateBuy}" />
-					<td th:text="${order.name}" />
-					<td th:text="${order.phone}" />
-					<td th:text="${order.address}" class="order_address"/>
-					<td th:text="${order.total}" />
-					
-					<td>
-						<span class='badge bg-warning' th:if="${order.status == 'pending'}"  th:text="${order.status}"/>
-						<span class='badge bg-success' th:if="${order.status == 'confirmed'}"  th:text="${order.status}"/>
-						<span class='badge bg-danger' th:if="${order.status == 'refused'}"  th:text="${order.status}"/>						
-					</td>
-					
-					<td><a
-						th:href="@{/employee/showOrderDetails(orderId=${order.id})}"
-						class="btn btn-info btn-sm"> Details </a> <br>
-						
-						<form th:if="${order.status=='pending'}" action="#" th:action="@{/employee/setOrderStatus}"
-							method="POST">
-							<input type="hidden" th:name="id" th:value="${order.id}" />
-							<button type="submit" class="btn btn-primary btn-sm" name='status'
-								value='confirmed'>Confirm</button>
-							<button type="submit" class="btn btn-warning btn-sm" name='status'
-								value='refused'>Refuse</button>
-						</form>
-				</tr>
-			</tbody>
-		</table>
-
-		<hr>
-		<form action="#" th:action="@{/logout}" method="POST">
-			<button type="submit" class="btn btn-outline-info">Logout</button>
-		</form>
-		<hr>
-		<a href="/" class=""> Back to home </a>
 	</div>
 
+
+	<!-- CART -->
+	<div id="snippetContent">
+		<link rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/css/bootstrap.min.css">
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/js/bootstrap.bundle.min.js"></script>
+		<div class="container px-3 my-5 clearfix">
+			<form th:action="@{/cart/performSelectedItems}" method="POST">
+				<div class="card">
+					<div class="card-header d-flex justify-content-between">
+						<h2>Order Details</h2>
+					</div>
+					<div class="card-body">
+						<div class="table-responsive">
+							<table class="table table-bordered m-0">
+								<thead>
+									<tr>
+										<th class="text-center py-3 px-4" style="min-width: 400px;">Product</th>
+										<th class="text-right py-3 px-4" style="width: 100px;">Price</th>
+										<th class="text-center py-3 px-4" style="width: 120px;">Quantity</th>
+										<th class="text-right py-3 px-4" style="width: 100px;">Total</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="orderDetail : ${ORDER.orderDetails}">
+										<td class="p-4">
+											<div class="media align-items-center">
+												<img
+													src="https://bootdey.com/img/Content/avatar/avatar1.png"
+													class=" d-block ui-w-40 ui-bordered mr-4 object-fit-cover border rounded item-cart-avt"
+													alt="">
+												<div class="media-body">
+													<a href="#" class="d-block text-dark"
+														th:text="${orderDetail.sku}"></a> <small> <span
+														class="text-muted" th:text="'SKU: ' + ${orderDetail.sku}"></span>
+														<!-- <span class="text-muted"> Color: ... </span> <span
+													class="ui-product-color ui-product-color-sm align-text-bottom"
+													style="background: #e81e2c;"></span> &nbsp; <span
+													class="text-muted">Size: ... </span> -->
+													</small>
+												</div>
+											</div>
+										</td>
+										<td class="text-right font-weight-semibold align-middle p-4"
+											th:text="${orderDetail.price}">$57.55</td>
+										<td class="align-middle p-4"><input disabled type="text"
+											class="form-control text-center"
+											th:value="${orderDetail.quantity}"></td>
+										<td class="text-right font-weight-semibold align-middle p-4"
+											th:text="${orderDetail.total}">$115.1</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		<link rel="stylesheet" th:href="@{/myassets/css/home.css}">
 </body>
 
 </html>

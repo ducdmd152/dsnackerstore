@@ -1,7 +1,9 @@
 package com.ducdmd152.springboot.dsnackerstore.controller;
 
+import java.security.Principal;
 import java.sql.Timestamp;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,7 +26,7 @@ import com.ducdmd152.springboot.dsnackerstore.order.Order;
 import com.ducdmd152.springboot.dsnackerstore.order.OrderDetail;
 import com.ducdmd152.springboot.dsnackerstore.order.OrderService;
 import com.ducdmd152.springboot.dsnackerstore.utils.OrderUtil;
-import com.ducdmd152.springboot.dsnackerstore.utils.ScopeUtil;
+import com.ducdmd152.springboot.dsnackerstore.utils.SessionUtil;
 
 @Controller
 @RequestMapping("/order")
@@ -33,7 +36,7 @@ public class OrderController {
 	@Autowired
 	private OrderService orderService;
 	@Autowired
-	private ScopeUtil scopeUtil;
+	private SessionUtil scopeUtil;
 	
 	@InitBinder
 	public void trimValueOfParameters(WebDataBinder dataBinder) {
@@ -48,12 +51,12 @@ public class OrderController {
 			@Valid @ModelAttribute("ORDER") Order orderFromView,
 			BindingResult bindingOrderResult,
 			@RequestParam int preparedOrderKey,
-			HttpSession session
+			HttpSession session,
+			Principal principal
 			) {
 		// case user's input errors
 		if(bindingOrderResult.hasErrors()) {
 			// send to view
-			System.out.println("User's input errors!!!");
 			model.addAttribute("ORDER", orderFromView);
 			model.addAttribute("PREPARED_ORDER_KEY", preparedOrderKey);
 			return "raw/cart/checkout";
@@ -91,6 +94,11 @@ public class OrderController {
 			order.setDateBuy(new Timestamp(System.currentTimeMillis()));
 			// set status
 			order.setStatus("pending");
+			// set username
+			if(principal != null) {
+				order.setUsername(principal.getName());
+			}
+			
 			
 			// save into database
 			orderService.saveOrder(order);
@@ -107,13 +115,19 @@ public class OrderController {
 			preparedOrders.remove(preparedOrderKey);
 			
 			// send to view
-			model.addAttribute("ORDER", order);
-			return "raw/order/orderSuccess";
+//			model.addAttribute("ORDER", order);
+			return "redirect:/order/showOrder?id=" + order.getId();
 		}
 		else {
 			return "raw/order/orderFail";
 		}
 	}
 	
-	
+	@GetMapping("/showOrder")
+	public String showOrder(Model model, @RequestParam int id) {
+		Order order = orderService.getOrder(id);
+		
+		model.addAttribute("ORDER", order);
+		return "raw/order/orderSuccess";
+	}
 }

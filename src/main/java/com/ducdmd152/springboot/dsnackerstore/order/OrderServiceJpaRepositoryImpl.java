@@ -39,4 +39,13 @@ public class OrderServiceJpaRepositoryImpl
 		return order; 
 	}
 
+	@Override
+	public List<Order> getOrdersByUser(String username) {
+		return orderJpaRepository.findAllByUsername(username);
+	}
+
+	@Override
+	public List<Order> getOrdersByUserWithStatus(String username, String status) {
+		return orderJpaRepository.findAllByUsernameAndStatus(username, status);
+	}
 }
