@@ -28,10 +28,14 @@
         - View details of the prepared order. 
         - Fill in the delivery information.  
         - Receive the corresponding bill/information about the order.  
+    - **View his/her order**:
+        - View list of orders. 
+        - View details of each order.
  - **As an EMPLOYEE**, we can do some operations :
 	-  Manage **products** in store like view product list, create new product, update exist product,...
 	-  Manage **orders** from customers like view orders with status *(all, pending, confirmed, refused)* ; and also confirm/refuse orders in pending order list.
  - **Expected features in version 2.0**:
+ 	- **As an CUSTOMER**, we can cancel orders what are still in pending status (NOT YET confirmed/refused by employees).
 	- **As an OWNER**, we can do some operations :
 		 - Manage employees with CRUD actions.
 		 - View the statistics about activities in the store.
