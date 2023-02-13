@@ -21,12 +21,12 @@ public class User {
 	@Id
 	@Column(name="username")
 	@NotNull(message="Username is required.")
-	@Size(min = 6, max = 20, message="Username is required input from 6 to 20 characters")
+	@Size(min = 4, max = 20, message="Username is required input from 4 to 20 characters")
 	private String username;
 	
 	@Column(name="password")
 	@NotNull(message="Password is required.")
-	@Size(min = 8, max = 72, message="Password is required input from 8 to 32 characters")
+	@Size(min = 6, max = 72, message="Password is required input from 6 to 32 characters")
 	private String password;
 	
 	@Column(name="enabled")
