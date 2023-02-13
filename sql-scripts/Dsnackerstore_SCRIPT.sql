@@ -1,3 +1,10 @@
+CREATE USER 'dsnackerstore'@'localhost' IDENTIFIED BY 'dsnackerstore';
+
+GRANT ALL PRIVILEGES ON * . * TO 'dsnackerstore'@'localhost';
+
+ALTER USER 'dsnackerstore'@'localhost' IDENTIFIED WITH mysql_native_password BY 'dsnackerstore';
+
+
 CREATE DATABASE  IF NOT EXISTS `dsnackerstore` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `dsnackerstore`;
 -- MySQL dump 10.13  Distrib 8.0.30, for Win64 (x86_64)
