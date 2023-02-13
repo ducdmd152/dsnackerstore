@@ -78,13 +78,20 @@ public class EmployeeController {
 	public String setOrderStatus(
 			Model model,
 			@RequestParam int id,
-			@RequestParam String status
+			@RequestParam String status,
+			@RequestParam(required = false) String requestFromUrl
 			) {
 		Order order = orderService.getOrder(id);
 		order.setStatus(status);
 		orderService.saveOrder(order);
+//		System.out.println(requestFromUrl);
+		if(requestFromUrl!=null) {
+			return "redirect:" + requestFromUrl;
+		}
+		else {
+			return "redirect:/employee/showOrderDetails?orderId=" + id;
+		}
 		
-		return "redirect:/employee/showOrderDetails?orderId=" + id;
 	}
 
 	// products management
