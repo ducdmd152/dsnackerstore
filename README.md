@@ -1,6 +1,4 @@
-
-
-# 👟 DSnacker Store *| sneaker online shop* (*in process*)
+# 👟 DSnacker Store *| shoes online shop* (*released v1.0*)
 ### Author: **[Duc Dao](https://beacons.ai/ducdmd152)**
 ### #springwebapplicationdevelopment
 --------------------------------------------------
@@ -48,7 +46,7 @@
 - ***Notice**:*
 	- *This web is tested for screens and features on desktops; not yet for mobile.*
 
-## Live Demo: 👉 [here]()
+## Live Demo: 👉 [here](https://youtu.be/hNdUvkhrdkY)
 
 ## Technology
 
@@ -72,12 +70,18 @@
 
 ## How can Get Started
 
-- Source/Project:
-    - Download the [source code here](https://github.com/ducdmd152/https://github.com/ducdmd152/dsnackerstore).
-- Database:
-    - Execute the [DSnacker_SCRIPT.sql script]()
-    - Customize the information in [application.properties](https://github.com/ducdmd152/dsnackerstore/blob/main/src/main/resources/application.properties) for adapting to your case.
+- **Source/Project**:
+    - Download the source code.
+- **Database**:
+    - Execute the [Dsnackerstore_SCRIPT.sql](https://github.com/ducdmd152/dsnackerstore/blob/main/sql-scripts/Dsnackerstore_SCRIPT.sql) in sql-scripts folder.
+    - Customize the information in [application.properties](https://github.com/ducdmd152/dsnackerstore/blob/main/src/main/resources/application.properties) in /src/main/resources/application.properties for adapting to your case.
    
+- **Already accounts** to login in the system:
+
+	| Username | Password | Role     |
+	|----------|----------|----------|
+	| tueminh  | 123456   | CUSTOMER |
+	| baoanh   | 123456   | EMPLOYEE |
 
 ## License & Copyright
 &copy; 2023 Duc Dao ducdmd152 Licensed under the [GNU LICENSE](https://github.com/ducdmd152/dsnackerstore/blob/main/LICENSE).
