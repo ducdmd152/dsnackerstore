@@ -1,5 +1,6 @@
 # 👟 DSnacker Store *| shoes online shop* (*released v1.0*)
 ### Author: **[Duc Dao](https://beacons.ai/ducdmd152)**
+### Released version: [ DSnacker Store 1.0](https://github.com/ducdmd152/dsnackerstore/releases/tag/1.0)
 ### #springwebapplicationdevelopment
 --------------------------------------------------
 ## Table of Contents
